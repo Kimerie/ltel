@@ -13,27 +13,5 @@
 {% endblock %}
 
 {% block content %}
-<div ng-app="casterdex">
-  <div ng-controller="MainCtrl">
 
-    <div class="jumbotron">
-      <h1>Crystal Casters</h1>
-
-      <div>
-        <button class="btn btn-primary" ng-click="login()" ng-disabled="user.connected">Connect
-          with Facebook
-        </button>
-        &nbsp;
-        <button class="btn btn-danger" ng-click="logout()"
-                ng-disabled="!user.connected">Logout
-        </button>
-        <div ng-show="user.connected"><h3>[[ user.greetings ]] [[ apiMe.name ]]</h3></div>
-      </div>
-    </div>
-    <h2>Upcoming Events</h2>
-    <ul>
-      <li ng-repeat="event in events.schedules">[[ event.start_date*1000 | date:'yyyy-MM-dd HH:mm:ss Z']]: [[ event.dname ]]</li>
-    </ul>
-  </div>
-</div>
 {% endblock %}

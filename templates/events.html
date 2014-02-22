@@ -15,36 +15,6 @@
 {% endblock %}
 
 {% block content %}
-    <div class="jumbotron">
-		<h1>Crystal Casters</h1>
-    </div>
-
-<h2>Upcoming Events</h2>
-<div id="events_div">
-</div>
-
-<script>
-var CASTERS_HOST ='{{casters_host}}';
-
-function loadEvents() {
-    console.log("loadEvents");
-    $.getJSON('/static/json/events.json', 
-    function(resData, textStatus, jqXHR) {
-        data = jqXHR.responseJSON;
-        console.log(data);
-        var now = new Date(data.server_time * 1000);
-        console.log(now);
-
-        var ul = $('<ul>').appendTo('#events_div');
-        $(data.schedules).each( function(index, s) {
-          var start = new Date(s.start_date * 1000);
-          ul.append( $(document.createElement('li')).text(start + ": " + s.dname));
-        });
-    }
-)}
-
-$( document ).ready( loadEvents )
-
-</script>
+ 
   
 {% endblock %}
