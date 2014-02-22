@@ -1,0 +1,13 @@
+simplejson==3.3.0
+pymongo==2.6.2
+Flask==0.10.1
+Jinja2==2.7.1
+MarkupSafe==0.18
+Werkzeug==0.9.4
+itsdangerous==0.23
+wsgiref==0.1.2
+gunicorn==18.0
+Flask-Script==0.6.3
+Flask-OAuth==0.12
+Flask-SSLify==0.1.4
+facebook-sdk==0.4.0

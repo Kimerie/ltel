@@ -1,0 +1,28 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}Login page{% endblock %}
+
+
+{% block content %}
+<div id="fb-root"></div>
+<script>
+
+</script>
+
+
+<div class="jumbotron">
+  <h1>Crystal Casters</h1>
+  <p>
+    login
+  </p>
+
+  <fb:login-button show-faces="true" width="200" max-rows="1"></fb:login-button>
+  <br/>
+  <hr>
+
+  <div class="fb-like" data-href="https://prod-casterdex.herokuapp.com/" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+
+
+</div>
+
+{% endblock %}

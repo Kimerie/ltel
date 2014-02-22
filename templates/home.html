@@ -1,0 +1,24 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}MViz - Home{% endblock %}
+
+{% block sidebar %}
+<div>
+  <ul class="nav nav-pills nav-stacked">
+  	<li>
+  	<a href="#tabs5-pane1" data-toggle="tab">Nav 1</a>
+  	</li>
+  	<li>
+  	<a href="/events" >Events</a>
+  </ul>
+</div>
+{% endblock %}
+
+{% block content %}
+    <div class="jumbotron">
+		<h1>Crystal Casters</h1>
+		<p>
+    	images:{{ IMG_SERVER }}
+    </p>
+    </div>
+{% endblock %}

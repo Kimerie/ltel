@@ -1,0 +1,155 @@
+{
+  "server_time": 1392954679,
+  "schedules": [
+    {
+      "dname": "Balance Test Dungeon",
+      "start_date": 1370044800,
+      "featured": 0,
+      "description": "Balance Testing",
+      "cname": "event_balance_test",
+      "advance_notice_mins": 0,
+      "advance_notice_hours": 1,
+      "end_date": 1406678400
+    },
+    {
+      "dname": "in-progress content",
+      "start_date": 1577836800,
+      "featured": 0,
+      "description": null,
+      "cname": "future",
+      "advance_notice_mins": 0,
+      "advance_notice_hours": 0,
+      "end_date": 1609459200
+    },
+    {
+      "dname": "Event Art Test 2",
+      "start_date": 1386547200,
+      "featured": 0,
+      "description": "Test event to make sure event dungeons work!",
+      "cname": "event_dungeon_test2",
+      "advance_notice_mins": 120,
+      "advance_notice_hours": 120,
+      "end_date": 1418947200
+    },
+    {
+      "dname": "Event Art Test 3",
+      "start_date": 1386547200,
+      "featured": 0,
+      "description": "Test event to make sure event dungeons work!",
+      "cname": "event_dungeon_test3",
+      "advance_notice_mins": 120,
+      "advance_notice_hours": 120,
+      "end_date": 1418947200
+    },
+    {
+      "dname": "Event Art Test 4",
+      "start_date": 1386547200,
+      "featured": 0,
+      "description": "Test event to make sure event dungeons work!",
+      "cname": "event_dungeon_test4",
+      "advance_notice_mins": 120,
+      "advance_notice_hours": 120,
+      "end_date": 1418947200
+    },
+    {
+      "dname": "Event Art Test 5",
+      "start_date": 1386547200,
+      "featured": 0,
+      "description": "Test event to make sure event dungeons work!",
+      "cname": "event_dungeon_test5",
+      "advance_notice_mins": 120,
+      "advance_notice_hours": 120,
+      "end_date": 1418947200
+    },
+    {
+      "dname": "Event Art Test 6",
+      "start_date": 1386547200,
+      "featured": 0,
+      "description": "Test event to make sure event dungeons work!",
+      "cname": "event_dungeon_test6",
+      "advance_notice_mins": 120,
+      "advance_notice_hours": 120,
+      "end_date": 1418947200
+    },
+    {
+      "dname": "Event Art Test 7",
+      "start_date": 1386547200,
+      "featured": 0,
+      "description": "Test event to make sure event dungeons work!",
+      "cname": "event_dungeon_test7",
+      "advance_notice_mins": 120,
+      "advance_notice_hours": 120,
+      "end_date": 1418947200
+    },
+    {
+      "dname": "Event Art Test 8",
+      "start_date": 1386547200,
+      "featured": 0,
+      "description": "Test event to make sure event dungeons work!",
+      "cname": "event_dungeon_test8",
+      "advance_notice_mins": 120,
+      "advance_notice_hours": 120,
+      "end_date": 1418947200
+    },
+    {
+      "dname": "Event Art Test 9",
+      "start_date": 1386547200,
+      "featured": 0,
+      "description": "Test event to make sure event dungeons work!",
+      "cname": "event_dungeon_test9",
+      "advance_notice_mins": 120,
+      "advance_notice_hours": 120,
+      "end_date": 1418947200
+    },
+    {
+      "dname": "Power Cell Dungeon",
+      "start_date": 1392832800,
+      "featured": 1,
+      "description": "Visit the Place of Power for evo mats!",
+      "cname": "wednesday_cadence",
+      "advance_notice_mins": 15,
+      "advance_notice_hours": 15,
+      "end_date": 1392918300
+    },
+    {
+      "dname": "Conjured Dungeon",
+      "start_date": 1392919200,
+      "featured": 1,
+      "description": "Find conjured golem mats in the Circle! ",
+      "cname": "thursday_cadence",
+      "advance_notice_mins": 15,
+      "advance_notice_hours": 15,
+      "end_date": 1393004700
+    },
+    {
+      "dname": "Construct Dungeon",
+      "start_date": 1393005600,
+      "featured": 1,
+      "description": "The Golem Workshop has appeared!",
+      "cname": "friday_cadence",
+      "advance_notice_mins": 15,
+      "advance_notice_hours": 15,
+      "end_date": 1393091100
+    },
+    {
+      "dname": "Gold Dungeon",
+      "start_date": 1393092000,
+      "featured": 1,
+      "description": "Load up on gold in the Vault!",
+      "cname": "weekend_cadence",
+      "advance_notice_mins": 1440,
+      "advance_notice_hours": 15,
+      "end_date": 1393263900
+    },
+    {
+      "dname": "Uncommon Boost Dungeon",
+      "start_date": 1392919200,
+      "featured": 1,
+      "description": "Check out the Grand Library for boosters!",
+      "cname": "boost_uncommon",
+      "advance_notice_mins": 15,
+      "advance_notice_hours": 15,
+      "end_date": 1393004700
+    }
+  ]
+}

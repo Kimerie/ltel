@@ -1,0 +1,406 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"sc",
+				"schedules"
+			],
+			[
+				"js",
+				"jsonpp(d, msg)	(imported, function)"
+			],
+			[
+				"prop",
+				"properties"
+			],
+			[
+				"apid",
+				"apidata"
+			],
+			[
+				"countr",
+				"country_code"
+			],
+			[
+				"api",
+				"apiData"
+			],
+			[
+				"from",
+				"from_date"
+			],
+			[
+				"coun",
+				"country_code"
+			],
+			[
+				"pai",
+				"paid_count"
+			],
+			[
+				"uniq",
+				"uniqueLogins"
+			],
+			[
+				"uni",
+				"uniqueLogins"
+			],
+			[
+				"json",
+				"jsonpp"
+			],
+			[
+				"to",
+				"to_date"
+			],
+			[
+				"def",
+				"default"
+			],
+			[
+				"day",
+				"day_stamp"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "Packages/Python/Python.sublime-build",
+	"command_palette":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"pac",
+				"Package Control: Install Package"
+			],
+			[
+				"pack",
+				"Package Control: List Packages"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"packa",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 449.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"import urllib2, os;",
+			"import urllib2,os; pf='Package Control.sublime-package'; ipp = sublime.installed_packages_path(); os.makedirs( ipp ) if not os.path.exists(ipp) else None; urllib2.install_opener( urllib2.build_opener( urllib2.ProxyHandler( ))); open( os.path.join( ipp, pf), 'wb' ).write( urllib2.urlopen( 'http://sublime.wbond.net/' +pf.replace( ' ','%20' )).read()); print( 'Please restart Sublime Text to finish installation')"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/dc/dev/klab/casterdex/bin/deploy.sh",
+		"/Users/dc/dev/klab/casterdex/static/splash/v01/play.html",
+		"/Users/dc/dev/klab/casterdex/static/splash/animlibs.js",
+		"/Users/dc/dev/klab/casterdex/static/js/vendor/placeholder.js",
+		"/Users/dc/dev/klab/casterdex/Procfile",
+		"/Users/dc/dev/klab/casterdex/static/app/partials/top.html",
+		"/Users/dc/dev/klab/casterdex/static/app/partials/faqs.html",
+		"/Users/dc/dev/klab/casterdex/static/app/cdex.js",
+		"/Users/dc/dev/klab/casterdex/static/css/cdex.css",
+		"/Users/dc/dev/klab/casterdex/static/base.html",
+		"/Users/dc/dev/klab/casterdex/static/json/events.json",
+		"/Users/dc/dev/klab/casterdex/webapp.py",
+		"/Users/dc/dev/klab/casterdex/resources/home.py",
+		"/Users/dc/dev/klab/casterdex/casterdex.sublime-project",
+		"/Users/dc/dev/klab/casterdex/static/index.html",
+		"/Users/dc/dev/klab/casterdex/templates/layouts/f5.html",
+		"/Users/dc/dev/klab/spellchain/bin/build",
+		"/Users/dc/dev/klab/spellchain/bin/upload.sh",
+		"/Users/dc/dev/klab/spellchain/bin/upstatic.sh",
+		"/Users/dc/dev/klab/spellchain/bin/updir.sh",
+		"/Users/dc/dev/klab/spell-server/bin/db/pg-prod.sh",
+		"/Users/dc/dev/klab/mviz-spellchain/rdev/spellchain-analysis/r/markdown/old_markdown/do-10-prior-during-post-events.Rmd",
+		"/Users/dc/dev/klab/mviz-spellchain/venv/lib/python2.7/orig-prefix.txt",
+		"/Users/dc/dev/klab/mviz-spellchain/rdev/spellchain-analysis/r/lib/project-ggplot-themes.R",
+		"/Users/dc/dev/klab/mviz-spellchain/lib/queryfuncs/people.py",
+		"/Users/dc/.zshdc",
+		"/Users/dc/.zshrc",
+		"/Users/dc/dev/klab/mviz-spellchain/lib/spell_queries.py",
+		"/Users/dc/dev/klab/mviz-spellchain/bin/task/any.sh",
+		"/Users/dc/dev/klab/mviz-spellchain/bin/task/untitled",
+		"/Users/dc/dev/klab/mviz-spellchain/README-spellchain.md",
+		"/Users/dc/dev/klab/mviz-spellchain/venv/lib/python2.7/sre_parse.py",
+		"/Users/dc/dev/klab/mviz-spellchain/lib/mputil/people2csv.py",
+		"/Users/dc/dev/klab/mviz-spellchain/logs/prod-errors.csv",
+		"/Users/dc/dev/klab/mviz-spellchain/Procfile",
+		"/Users/dc/dev/klab/mviz-spellchain/lib/mixpanelx.py",
+		"/Users/dc/dev/klab/mviz-spellchain/lib/mixpanel.py",
+		"/Users/dc/dev/klab/mviz-spellchain/venv/lib/python2.7/encodings/mac_iceland.py",
+		"/Users/dc/dev/klab/mviz-spellchain/manage.py",
+		"/Users/dc/dev/klab/spell-server/conf/heroku.ini",
+		"/Users/dc/dev/klab/spell-server/bin/installs-prod.sh",
+		"/Users/dc/dev/klab/spell-server/logs/installs.txt",
+		"/Users/dc/dev/klab/spell-server/lods-installs.json",
+		"/Users/dc/dev/klab/spell-server/logs/inst.txt",
+		"/Users/dc/dev/klab/spell-server/spellchain/static/api/map/user/progress/island-name.json",
+		"/Users/dc/dev/klab/spell-server/spellchain/config.py",
+		"/Users/dc/dev/klab/spell-server/docs/conf.py",
+		"/Users/dc/dev/klab/spell-server/bin/console.sh",
+		"/Users/dc/dev/klab/spell-server/spellchain/static/js/jqplot/examples/canvas-overlay.html",
+		"/Users/dc/dev/klab/spell-server/bin/changelog",
+		"/Users/dc/appoxee.txt",
+		"/Users/dc/dev/klab/mviz-spellchain/lib/utils.py",
+		"/Users/dc/dev/klab/mviz-spellchain/rdev/spellchain-analysis/data/raw/2013-09-03-review-data/get-all-distinct-events_20130829_1755_20130829-1107.csv",
+		"/Users/dc/dev/klab/mviz-spellchain/rdev/spellchain-analysis/r/markdown/old_markdown/do-17-player-depth.html",
+		"/Users/dc/dev/klab/mviz-spellchain/bin/mongo/run/dump/1203.txt",
+		"/Users/dc/dev/klab/mviz-spellchain/bin/arpdau.sh",
+		"/Users/dc/dev/klab/mviz-spellchain/lib/utilities.py",
+		"/Users/dc/dev/klab/mviz-spellchain/lib/queryfuncs/quests.py",
+		"/Users/dc/dev/klab/mviz-spellchain/requirements.txt",
+		"/Users/dc/dev/klab/mviz-spellchain/venv/lib/python2.7/encodings/raw_unicode_escape.py",
+		"/Users/dc/dev/klab/mviz-spellchain/rdev/spellchain-analysis/r/markdown/retention-data-used.xlsx",
+		"/Users/dc/dev/klab/mviz-spellchain/README.md",
+		"/Users/dc/dev/klab/mviz-spellchain/lib/arpdau.py",
+		"/Users/dc/dev/klab/mviz-spellchain/bin/tasks.sh",
+		"/Users/dc/dev/klab/mviz-spellchain/bin/mongo/run/robomongojs/tutorial-user.js",
+		"/Users/dc/Library/Application Support/Sublime Text 3/Packages/User/Default (OSX).sublime-keymap",
+		"/Users/dc/dev/klab/mviz-spellchain/bin/upload.sh",
+		"/Users/dc/dev/klab/mviz-spellchain/lin",
+		"/Users/dc/dev/klab/mviz-spellchain/rdev/spellchain-analysis/r/markdown/acquisition.Rmd",
+		"/Users/dc/dev/shumi/corona/app2/view2.lua",
+		"/Users/dc/dev/shumi/corona/app2/view1.lua",
+		"/Users/dc/dev/shumi/corona/app2/main.lua",
+		"/Users/dc/dev/klab/spellchain/server/.gitignore",
+		"/Users/dc/dev/klab/spellchain/server/static/build/build.html"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"http:",
+			"mongo",
+			"MAT",
+			"getPeople",
+			"csv",
+			"api",
+			"request",
+			"getPeople",
+			"request",
+			"getPeople",
+			"string",
+			"getPeople",
+			"resData",
+			"getPeople",
+			"day_stamp",
+			"getSeg",
+			"payrate",
+			"utils",
+			"print",
+			"csvout",
+			"uuData",
+			"jsonpp",
+			"Utils.",
+			"time",
+			"raw_input",
+			"from_date",
+			"ALERTLIST",
+			"show_msg",
+			"mailer",
+			"spell",
+			"Web",
+			"unity"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"https:",
+			"",
+			"apidata['uu']",
+			""
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 224.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"project": "casterdex.sublime-project",
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"play",
+				"static/splash/v01/play.html"
+			],
+			[
+				"web",
+				"webapp.py"
+			],
+			[
+				"pg-p",
+				"venv/lib/python2.7/orig-prefix.txt"
+			],
+			[
+				"spellq",
+				"lib/spell_queries.py"
+			],
+			[
+				"peo",
+				"lib/queryfuncs/people.py"
+			],
+			[
+				"mixpa",
+				"lib/mixpanelx.py"
+			],
+			[
+				"mix",
+				"lib/mixpanel.py"
+			],
+			[
+				"inst",
+				"bin/installs-prod.sh"
+			],
+			[
+				"con",
+				"spellchain/config.py"
+			],
+			[
+				"req",
+				"requirements.txt"
+			],
+			[
+				"arp",
+				"lib/arpdau.py"
+			],
+			[
+				"arpd",
+				"bin/arpdau.sh"
+			],
+			[
+				"util",
+				"lib/utils.py"
+			],
+			[
+				"bui",
+				"build"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+		],
+		"width": 593.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 161.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

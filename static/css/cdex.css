@@ -1,0 +1,11 @@
+.animate-enter {
+	-webkit-transition: 1s linear all; /* Chrome */
+	transition: 1s linear all;
+	background-color: green;
+	opacity: 0;
+}
+ 
+.animate-enter.animate-enter-active {
+	opacity: 0.5;
+	background-color: red;
+}
