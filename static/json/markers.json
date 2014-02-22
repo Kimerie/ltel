@@ -3,35 +3,41 @@
 	"markers": [
 		{
 			"key": "transitions",
-			"search": [ "for example", "when", "because", "so"],
-			"position": ["start"]
+			"words": [ "for example", "when", "because", "so"],
+			"position": "start",
+			"score": 1
 		},
-
+	
 		{
 			"key": "complexity",
-			"search": [ 
+			"words": [ 
 				"for", "and", "nor", "but", "or", "yet", "so"
 				],
 			"position": ["middle"]
 		},
 
-
 		{
 			"key": "badwords",
-			"search": [ 
-				"for", "thing", "like", "you know", "good", "umm", "just is"
-				],
-			"position": ["anywhere"],
+			"words": [ "lots", "more", "whatev"],
 			"score": -1
 		},
 
 		{
-			"key": "precision",
-			"search": [ 
-				"lots"
-				],
-			"position": ["anywhere"],
-			"score": 1
+			"key": "badwords",
+			"words": [ "blah", "boo" ],
+			"score": -2
+		},
+		
+		{
+			"key": "goodwords",
+			"words": [ "compile", "viewpoint" ],
+			"score": 2
+		},
+
+		{
+			"key": "goodwords",
+			"list": [ "compile", "viewpoint" ],
+			"score": 4
 		},
 
 	]
