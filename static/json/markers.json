@@ -15,21 +15,24 @@
 			"position": ["middle"]
 		},
 
+
 		{
-			"key": "complexity",
+			"key": "badwords",
 			"search": [ 
-				"for", "and", "nor", "but", "or", "yet", "so"
+				"for", "thing", "like", "you know", "good", "umm", "just is"
 				],
-			"position": ["middle"]
+			"position": ["anywhere"],
+			"score": -1
 		},
 
 		{
 			"key": "precision",
-			"scoresearch": {
-				"1": ["lots"],
-				"2": ["often"],
-				"3": ["frequently", "incessantly"]
-			}
-		}
+			"search": [ 
+				"lots"
+				],
+			"position": ["anywhere"],
+			"score": 1
+		},
+
 	]
 }
