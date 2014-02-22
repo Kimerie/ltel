@@ -117,10 +117,6 @@ cdexApp.controller('RecordController', function ($scope) {
   $scope.message = 'recording!';
 });
 
-cdexApp.controller('ParserController', function ($scope) {
-  $scope.message = 'parsing!';
-});
-
 cdexApp.directive('cxNavBarItem', function ($location) {
   return {
     scope: {
@@ -148,3 +144,67 @@ cdexApp.directive('cxNavBarItem', function ($location) {
     }
   }
 })
+
+
+//// parser page
+
+cdexApp.controller('ParserController', function ($scope) {
+  $scope.message = 'parsing!';
+  $scope.blob = parse("");
+});
+
+
+function parseAll(blob) {
+  res = {
+    html: "<span>some text</span>",
+    score: 10
+  }
+  console.log(markers);
+  return res;
+}
+
+function parseBad(blob) {
+  
+}
+
+
+var markers = {
+  "markers": [
+    {
+      "key": "transitions",
+      "search": [ "for example", "when", "because", "so"],
+      "position": ["start"]
+    },
+
+    {
+      "key": "complexity",
+      "search": [ 
+        "for", "and", "nor", "but", "or", "yet", "so"
+        ],
+      "position": ["middle"]
+    },
+
+
+    {
+      "key": "badwords",
+      "search": [ 
+        "for", "thing", "like", "you know", "good", "umm", "just is"
+        ],
+      "position": ["anywhere"],
+      "score": -1
+    },
+
+    {
+      "key": "precision",
+      "search": [ 
+        "lots"
+        ],
+      "position": ["anywhere"],
+      "score": 1
+    },
+
+  ]
+}
+
+
+
