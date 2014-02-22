@@ -15,11 +15,14 @@ cdexApp.config(['$routeProvider',
         templateUrl: 'app/partials/record.html',
         controller: 'RecordController'
       }).
-
       when('/events', {
         templateUrl: 'app/partials/events.html',
         controller: 'EventsController'
       }).
+      when('/parser', {
+        templateUrl: 'app/partials/parser.html',
+        controller: 'ParserController'
+      }).      
       when('/faqs', {
         templateUrl: 'app/partials/faqs.html',
         controller: 'FaqsController'
@@ -114,6 +117,9 @@ cdexApp.controller('RecordController', function ($scope) {
   $scope.message = 'recording!';
 });
 
+cdexApp.controller('ParserController', function ($scope) {
+  $scope.message = 'parsing!';
+});
 
 cdexApp.directive('cxNavBarItem', function ($location) {
   return {
