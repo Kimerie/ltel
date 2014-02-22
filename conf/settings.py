@@ -1,5 +1,5 @@
 HOST = '127.0.0.1'
-PORT = 5020
+PORT = 5050
 DEBUG = True
 APP_SECRET_KEY = 'xyzapp000'
 
@@ -7,4 +7,3 @@ FACEBOOK_APP_ID = '373753649392039'
 FACEBOOK_APP_SECRET = '597712577582827a057dd0f728385091'
 
 SITEROOT = "https://prod-casterdex.herokuapp.com/"
-
