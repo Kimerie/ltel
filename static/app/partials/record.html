@@ -115,7 +115,7 @@
         <div class="center">
             <div class="sidebyside" style="text-align:right">
                 <button id="copy_button" class="button" onclick="copyButton()">
-                    Copy and Paste</button>
+                    Save It</button>
                 <div id="copy_info" class="info">
                     Press Control-C to copy text.<br>(Command-C on Mac.)
                 </div>
@@ -297,6 +297,8 @@
                 if (final_transcript || interim_transcript) {
                     showButtons('inline-block');
                 }
+
+
             };
         }
 
@@ -327,13 +329,19 @@
         }
 
         function copyButton() {
+            if(final_transcript) {  // write to local storage
+                if(typeof(Storage) !== "undefined") {
+                    console.log("write to local storage");
+                    localStorage.setItem("contentText", final_transcript);
+                }
+            }
             if (recognizing) {
                 recognizing = false;
                 recognition.stop();
             }
-            copy_button.style.display = 'none';
-            copy_info.style.display = 'inline-block';
-            showInfo('');
+          //  copy_button.style.display = 'none';
+          //  copy_info.style.display = 'inline-block';
+           // showInfo('');
         }
 
         function emailButton() {
@@ -352,6 +360,7 @@
         function startButton(event) {
             if (recognizing) {
                 recognition.stop();
+
                 return;
             }
             final_transcript = '';
