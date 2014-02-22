@@ -19,5 +19,5 @@ git push heroku master
 # git push heroku yourbranch:master
 
 
-heroku open --app prod-casterdex &
+heroku open --app ltel &
 heroku logs --tail
