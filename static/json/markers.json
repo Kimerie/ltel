@@ -1,0 +1,35 @@
+{
+
+	"markers": [
+		{
+			"key": "transitions",
+			"search": [ "for example", "when", "because", "so"],
+			"position": ["start"]
+		},
+
+		{
+			"key": "complexity",
+			"search": [ 
+				"for", "and", "nor", "but", "or", "yet", "so"
+				],
+			"position": ["middle"]
+		},
+
+		{
+			"key": "complexity",
+			"search": [ 
+				"for", "and", "nor", "but", "or", "yet", "so"
+				],
+			"position": ["middle"]
+		},
+
+		{
+			"key": "precision",
+			"scoresearch": {
+				"1": ["lots"],
+				"2": ["often"],
+				"3": ["frequently", "incessantly"]
+			}
+		}
+	]
+}
