@@ -305,7 +305,7 @@ function loadLocalStorageData() {
         for(var i = 0; i < existingData.length; i++) {
              var entry = existingData[i];
             //dataContentDiv = dataContentDiv + "<li>" + entry.name + ": " + entry.data + "</li>";
-            dataContentDiv = dataContentDiv + "<li>" + entry.name + "</li>";
+            dataContentDiv = dataContentDiv + "<li id="+i+">" + entry.name + "</li>";
         }
         dataContentDiv = dataContentDiv+'</ul>';
         console.log(dataContentDiv);
@@ -315,7 +315,13 @@ function loadLocalStorageData() {
     {
         // Sorry! No Web Storage support..
     }
+    $('#datacontent').find('li').click(function(ev){
+        var ID = $(ev.target).attr('id');
+        entry = existingData[parseInt(ID)];
+        GLOBS.blob = entry.data;
+        window.location.href = '#results';
 
+    });
 }
 
 
