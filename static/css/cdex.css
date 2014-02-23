@@ -9,3 +9,8 @@
 	opacity: 0.5;
 	background-color: red;
 }
+
+.debug {
+	border: 1px dotted red;
+	/*border-right: 1px solid green;*/
+}
