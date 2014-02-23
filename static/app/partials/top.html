@@ -1,13 +1,13 @@
 <!-- Main Content -->
 <div class="row">
     <div class="medium-7 large-8 columns" id="story">
-        <h3>The Story So Far...</h3>
-        <div id = "result"></div>
-        {{message}}
-    </div>
+        
+        <div>
+        	<a href="#/topic">This is your topic</a></br>        	<a href="#/parser" class="button"><h2>GO!</h2></a></br>
+        	<a href='#/results' class="button">Results</a>
+    	</div>
 
-    <a href='#events'>events</a>
-    <a href='#faqs'>faqs</a>
+
 <script>
     console.log("get data from local storage");
     document.getElementById("result").innerHTML = localStorage.getItem("contentText");
