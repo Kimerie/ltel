@@ -85,7 +85,6 @@ cdexApp.factory('FaqService', function () {
       "answer": "and i'll give you an answer!"
     }
   ];
-
   return {
     data: faqs
   }
@@ -94,29 +93,19 @@ cdexApp.factory('FaqService', function () {
 
 cdexApp.controller('TopController', function ($scope) {
   $scope.message = 'top page';
+
+  // TODO better way to persist data across URLs
+  GLOBS.state = "top";
+  GLOBS.score = 7;
+  GLOBS.max_score = 10;
+  $scope.GLOBS = GLOBS;
 });
 
 cdexApp.controller('ResultsController', function ($scope) {
   $scope.message = 'results';
+  $scope.GLOBS = GLOBS;
 });
 
-
-cdexApp.controller('EventsController', function ($scope, EventService) {
-  $scope.message = 'events here';
-  EventService.async().then(function (data) {
-    $scope.events = data.schedules;
-  });
-});
-
-cdexApp.controller('FaqsController', function ($scope, FaqService) {
-  $scope.message = 'Just the FAQs';
-  $scope.faqs = FaqService.data;
-});
-
-
-cdexApp.controller('RecordController', function ($scope) {
-  $scope.message = 'recording!';
-});
 
 cdexApp.directive('cxNavBarItem', function ($location) {
   return {
@@ -326,6 +315,8 @@ function updateCountry() {
     }
     select_dialect.style.visibility = list[1].length == 1 ? 'hidden' : 'visible';
 }
+
+var GLOBS = {};   // hacky global for passing stuff around
 
 var recognizing = false;
 var create_email = false;
