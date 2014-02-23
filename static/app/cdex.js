@@ -150,7 +150,7 @@ cdexApp.directive('cxNavBarItem', function ($location) {
 
 cdexApp.controller('ParserController', function ($scope) {
   $scope.message = 'parsing!';
-  $scope.blob = parse("");
+  $scope.blob = parseAll("");
 });
 
 
