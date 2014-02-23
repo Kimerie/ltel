@@ -258,8 +258,9 @@ cdexApp.directive('cxNavBarItem', function ($location) {
 //// parser page
 
 cdexApp.controller('ParserController', function ($scope) {
-  console.log("ParserController.init");
-  recordStartup();
+    console.log("ParserController.init");
+    recordStartup();
+    $scope.GLOBS = GLOBS;
   // $scope.message = 'parsing!';
   // $scope.blob = parseAll("");
 });
@@ -465,7 +466,7 @@ function updateScore() {
     }
     GLOBS.score = score;
     var scoreText = document.getElementById("scoreTextId");
-    scoreText.innerHTML= "<h4>Score: "+score+"</h4>";
+    scoreText.innerHTML= "<h4>Score: <br/>  "+score+"</h4>";
 }
 
 
@@ -473,7 +474,8 @@ function updateScore() {
 
 function startButton(event) {
     if (recognizing) {
-        window.clearInterval(updateInterval);  // stop updating store and formt
+        window.clearInterval(updateInterval);  // stop updating store and format
+
         recognition.stop();
         return;
     }
