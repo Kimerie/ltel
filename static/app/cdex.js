@@ -171,6 +171,11 @@ cdexApp.config(['$routeProvider',
         controller: 'ChatController'
       }).
 
+      when('/admin', {
+        templateUrl: 'app/partials/admin.html',
+        controller: 'AdminController'
+      }).
+
       otherwise({
         redirectTo: '/top'
       });
@@ -206,17 +211,20 @@ cdexApp.controller('TopController', function ($scope) {
 cdexApp.controller('ResultsController', function ($scope) {
   $scope.message = 'results';
   $scope.GLOBS = GLOBS;
+  $("#scorebox").hide(0); 
+  $("#scorebox").show(1000);
 });
 
-cdexApp.controller('SkillsController', function ($scope) {
-  
+cdexApp.controller('SkillsController', function ($scope) {  
 });
 
-cdexApp.controller('ChatController', function ($scope) {
-  
+cdexApp.controller('ChatController', function ($scope) {  
 });
-cdexApp.controller('NotebookController', function ($scope) {
-  
+
+cdexApp.controller('NotebookController', function ($scope) {  
+});
+
+cdexApp.controller('AdminController', function ($scope) {
 });
 
 cdexApp.controller('PromptController', function ($scope) {
@@ -423,6 +431,14 @@ function copyButton() {
         recognition.stop();
     }
     updateScore();
+    goResults();
+}
+
+function goResults() {
+    //TODO - fix navigation
+    // $location.path('/results');
+    window.location.href = '#results';
+
 }
 
 function emailButton() {
