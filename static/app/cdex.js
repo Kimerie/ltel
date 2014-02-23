@@ -231,7 +231,6 @@ cdexApp.controller('ClassdataController', function ($scope) {
         {"name": "bob"}
     ]
 
-
     loadLocalStorageData();
 
 });
@@ -805,7 +804,9 @@ var markers = [
         {
             "key": "precision",
             "search": [
-                "exactly", "precisely", "specifically", "approximately"
+                "exactly", "precisely", "specifically", "approximately",
+                "consequences",
+                "opinion","consequence","adolescence"
             ],
             "position": ["anywhere"],
             "score": 30,
@@ -815,7 +816,8 @@ var markers = [
         {
             "key": "caution",
             "search": [
-                "for", "you know", "good", "umm", "just", "kind of", "err", "kinda", "sort of"
+                "for", "you know", "good", "umm", "just", "kind", 
+                "err", "kinda", "sort","kind","know","wanna","be","things","stuff"
             ],
             "position": ["anywhere"],
             "score": -10,
