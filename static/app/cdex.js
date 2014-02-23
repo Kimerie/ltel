@@ -692,7 +692,7 @@ var markers = [
 
         {
             "key": "vocabulary",
-            "search": [ "great", "wonderful", "improve", "exhausted", "sleepwalking", "slurred" ],
+            "search": [ "adolescent",  ],
             "position": ["start"],
             "score": 10,
             "klass": "precision10"
@@ -701,17 +701,17 @@ var markers = [
         {
             "key": "precision",
             "search": [
-                "exactly", "precisely", "specifically", "approximately"
+                "good", "bad", "a lot", "better", "worse", "hard", "easy", "fun", "little", "sad", "happy", "laugh", "big", "walk", "slow", "fast", "fat", "small", "nice", "pretty", "scared", "angry", "said", "love", "run", "saw", "smart", "talk",
             ],
             "position": ["anywhere"],
-            "score": 30,
+            "score": -10,
             "klass": "precision30"
         },
 
         {
-            "key": "caution",
+            "key": "caution", 
             "search": [
-                "for", "you know", "good", "umm", "just", "kind of", "err", "kinda", "sort of", "cool"
+            
             ],
             "position": ["anywhere"],
             "score": -10,
@@ -721,7 +721,8 @@ var markers = [
         {
             "key": "caution",
             "search": [
-                "thing", "like", "whatever", "sometime", "dunno", "sorta"
+                "thing", "like", "whatever", "sometime", "dunno", "sorta",
+                "for", "you know", "good", "umm", "just", "kind of", "err", "kinda", "sort of", "cool",
             ],
             "position": ["anywhere"],
             "score": -20,
