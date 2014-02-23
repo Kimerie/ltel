@@ -225,8 +225,6 @@ cdexApp.controller('ChatController', function ($scope) {
 cdexApp.controller('NotebookController', function ($scope) {  
 });
 
-cdexApp.controller('AdminController', function ($scope) {
-});
 
 cdexApp.controller('PromptController', function ($scope) {
   $scope.GLOBS = GLOBS;
