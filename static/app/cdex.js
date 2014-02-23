@@ -141,6 +141,12 @@ cdexApp.config(['$routeProvider',
         controller: 'AdminController'
       }).
 
+        when('/classdata', {
+            templateUrl: 'app/partials/classdata.html',
+            controller: 'ClassdataController'
+        }).
+
+
       otherwise({
         redirectTo: '/top'
       });
@@ -160,7 +166,8 @@ cdexApp.factory('EventService', function ($http) {
     return promise;
   };
   return EventService;
-})
+});
+
 
 
 cdexApp.controller('TopController', function ($scope) {
@@ -213,7 +220,57 @@ cdexApp.controller('ResultsController', function ($scope) {
   // $scope.blob = GLOBS.blob;   // persist VTT
   console.log(GLOBS.blob);
   $("#vtt-out").html(GLOBS.blob);
+  $("#saveDataId").click(function() {
+    /*  // save data
+      var data = [];
+      var entry1 = {
+        "name": "Emmy",
+          "data": 1
+      };
+      var entry2 = {
+          "name": "Chen",
+          "data": 5
+      };
+      data.push(entry1);
+      data.push(entry2);
+      localStorage.setItem('classdatacontent', JSON.stringify(data));
 
+      // read data
+      var rawdata = localStorage.getItem('classdatacontent');
+      console.log('retrievedObject: ', JSON.parse(rawdata));
+
+      var realdata = JSON.parse(rawdata);
+      for(var i = 0; i < realdata.length; i++) {
+          console.log(realdata[i].name + "  " + realdata[i].data);
+      }
+*/
+
+      console.log("save data");
+      if(typeof(Storage)!=="undefined")
+      {
+          var rawData = localStorage.getItem("classdatacontent");
+          var existingData;
+          if(rawData) {
+               existingData = JSON.parse(rawData);
+          } else {
+              existingData = [];
+          }
+
+          var className = "Class data "+existingData.length;
+          var entry = {
+              "name": className,
+              "data": GLOBS.blob
+          }
+          existingData.push(entry);
+          console.log(existingData);
+          localStorage.setItem("classdatacontent", JSON.stringify(existingData));
+      }
+      else
+      {
+          // Sorry! No Web Storage support..
+      }
+
+  });
 });
 
 cdexApp.controller('SkillsController', function ($scope) {  
@@ -227,6 +284,18 @@ cdexApp.controller('NotebookController', function ($scope) {
 
 cdexApp.controller('AdminController', function ($scope) {
 });
+
+cdexApp.controller('ClassdataController', function ($scope) {
+    $scope.userclasses = [
+        {"name": "fred"},
+        {"name": "bob"}
+    ]
+
+
+    loadLocalStorageData();
+
+});
+
 
 cdexApp.controller('PromptController', function ($scope) {
   $scope.GLOBS = GLOBS;
@@ -261,7 +330,7 @@ cdexApp.directive('cxNavBarItem', function ($location) {
       })
     }
   }
-})
+});
 
 
 //// parser page
@@ -283,12 +352,30 @@ cdexApp.controller('ParserController', function ($scope) {
 //   return res;
 // }
 
-// function parseBad(blob) {
-  
-// }
 
 
-///////////////////
+function loadLocalStorageData() {
+    if(typeof(Storage)!=="undefined")
+    {
+        var existingData = JSON.parse(localStorage.getItem("classdatacontent"));
+        console.log(existingData);
+        var dataContentDiv = '<ul>';
+        for(var i = 0; i < existingData.length; i++) {
+             var entry = existingData[i];
+            //dataContentDiv = dataContentDiv + "<li>" + entry.name + ": " + entry.data + "</li>";
+            dataContentDiv = dataContentDiv + "<li>" + entry.name + "</li>";
+        }
+        dataContentDiv = dataContentDiv+'</ul>';
+        console.log(dataContentDiv);
+        $('#datacontent').append(dataContentDiv);
+    }
+    else
+    {
+        // Sorry! No Web Storage support..
+    }
+
+}
+
 
 function updateCountry() {
     for (var i = select_dialect.options.length - 1; i >= 0; i--) {

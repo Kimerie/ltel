@@ -1,0 +1,11 @@
+<!-- Main Content -->
+<div class="row">
+<div id="datacontent">
+
+</div>
+<ul>
+    <li class="animate-repeat" ng-repeat="uc in userclasses | filter:q">
+        [{{$index + 1}}] {{uc.name}}
+    </li>
+</ul>
+</div>
