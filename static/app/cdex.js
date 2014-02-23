@@ -206,13 +206,21 @@ cdexApp.controller('TopController', function ($scope) {
   GLOBS.score = 7;
   GLOBS.max_score = 10;
   $scope.GLOBS = GLOBS;
+
+  for(var i=1;i<=3; i++) {
+    div = "#topic" + i;
+    console.log(div);
+    $(div).hide(0);
+    $(div).delay(i*100).slideDown(500);
+  }
+
 });
 
 cdexApp.controller('ResultsController', function ($scope) {
   $scope.message = 'results';
   $scope.GLOBS = GLOBS;
   $("#scorebox").hide(0); 
-  $("#scorebox").show(1000);
+  $("#scorebox").delay(500).show(1000);
 });
 
 cdexApp.controller('SkillsController', function ($scope) {  
