@@ -111,6 +111,10 @@ cdexApp.config(['$routeProvider',
         controller: 'PromptController'
       }).
 
+      when('/prompt-text', {
+        templateUrl: 'app/partials/prompt-text.html',
+      }).
+
       when('/parser', {
         templateUrl: 'app/partials/parser.html',
         controller: 'ParserController'
