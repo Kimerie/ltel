@@ -1,15 +1,21 @@
-<!-- Main Content -->
-<div class="row">
-    <div class="medium-7 large-8 columns" id="story">
-        <h3>The Story So Far...</h3>
-        <div id = "result"></div>
-        {{message}}
-    </div>
 
-    <a href='#events'>events</a>
-    <a href='#faqs'>faqs</a>
-<script>
-    console.log("get data from local storage");
-    document.getElementById("result").innerHTML = localStorage.getItem("contentText");
-</script>
+<div class="row">
+	<ul class="small-block-grid-3">
+
+		<li>
+			topic 1<br/>
+			<a href="#prompt" class="button">Go!</a>
+		</li>
+
+		<li>
+			Sleep Deprivation<br/>
+			<a href="#prompt" class="button">Go!</a>
+		</li>
+
+		<li>
+			Topic 3<br/>
+			<a href="#prompt" class="button">Go!</a>
+		</li>
+
+	</ul>
 </div>
