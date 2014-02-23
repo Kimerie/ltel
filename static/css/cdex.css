@@ -11,21 +11,12 @@
 }
 
 .debug {
-	border: 1px dashed #cccccc;
+	border: 1px dotted red;
 	/*border-right: 1px solid green;*/
 }
 
-.score {
-	font-size: 36px;
-	text-align: center;
-	background-color: yellow;
-	color: black;
-}
-
 .redH {
-	background: red;
-	font-size: 48px;
-   	color: white;
+   color: red;
 }
 .greenH {
     color:green;
@@ -33,95 +24,8 @@
 .yellowH {
     color:yellow;
 }
-.final {
-    color: black;
-    padding-right: 3px;
-}
 
-
-
-.rock-white {
-	color: white;
-}
-.ctr {
-	text-align: center;
-}
-
-.rline {
-	border-right: 1px dashed #999999;
-}
-
-.blob {
-	font-size: 36px;
-	border: 1px dashed gray;
-}
-
-.allowHint {
-	position: absolute;
-	top:0px;
-	right:0px;
-	background-color: red;
-	font-size: 24px;
-	text-align: center;
-	padding: 20px;
-	color: white;
-}
-
-.interim_vtt {
-	font-size: 18px;
-	border: 1px dotted #ccc;
-	padding: 10px;
-	color: #444;
-}
-
-.vtt-out {
-	font-size: 50px;
-	border: 1px solid #ddd;
-	padding: 10px;
-	line-height: 200%;
-}
-
-.vtt1 {
-	padding: 10px;
-	border: 1px dashed #ddd;
-	-webkit-border-radius: 15px;
-}
-
-.precision10 {
-	background-color: #66FF00;
-	color: black;
-}
-
-.precision30 {
-	background-color: #cf0;
-	color: black;
-}
-.precision50 {
-	background-color: #33FF00;
-	color: white;
-}
-
-.transition10 {
-	background-color: #CCFF99;
-}
-
-.caution20 {
-	background-color: #660000;
-	color: white;
-}
-
-.caution10 {
-	background-color: #ff9999;
-	color: black;
-}
-
-.fanboys {
-	font-size: 70px;
-	background-color: #99FFff;
-	color: black;
-}
-
-.bigtip {
-	font-size: 18px;
-	background-color: #0cf;
+.content 
+{
+	
 }
