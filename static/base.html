@@ -24,10 +24,15 @@
 
                     <section class="top-bar-section">
                         <ul class="right">
+<<<<<<< HEAD
                             <li cx-nav-bar-item cx-href="#/parser">Home</li>
                             <li cx-nav-bar-item cx-href="#/events">Notebook</li>
                             <li cx-nav-bar-item cx-href="#/record">Chat</li>
                             <li cx-nav-bar-item cx-href="#/results">Progress</li>
+=======
+                            <li cx-nav-bar-item cx-href="#/notebook">notebook</li>
+                            <li cx-nav-bar-item cx-href="#/chat">chat</li>
+>>>>>>> 746c37de7ce888a6d3275eaa2be129156334358a
                             <li cx-nav-bar-item cx-href="#/mobile" class="show-for-small-only">mobilenav</li>
                         </ul>
                     </section>
@@ -36,6 +41,7 @@
         </div> <!-- end of row -->
     </div>
 
+<<<<<<< HEAD
     
     <div style="padding-top: 10px" ng-view>
         <!-- Main Content gets inserted here -->
@@ -66,9 +72,27 @@
     <script src="lib/angular/angular.js"></script>
     <script src="lib/angular/angular-route.js"></script>
     <script src="app/cdex.js"></script>
+=======
+    <body id='body'>
+        <div ng-view>
+            <!-- Main Content gets inserted here -->
+        </div>
 
-    <script>
-    $(document).foundation();
-    </script>
-</body>
+        <hr>
+        <footer class="row">
+            <a href="#about">about</a>
+        </footer>
+    
+        <script src="js/vendor/jquery.js"></script>
+        <script src="js/foundation.min.js"></script>
+        <script src="lib/angular/angular.js"></script>
+        <script src="lib/angular/angular-route.js"></script>
+        <script src="app/cdex.js"></script>
+
+        <script>
+            $(document).foundation();
+        </script>
+>>>>>>> 746c37de7ce888a6d3275eaa2be129156334358a
+
+    </body>
 </html>
