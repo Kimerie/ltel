@@ -141,6 +141,11 @@ cdexApp.config(['$routeProvider',
         controller: 'AdminController'
       }).
 
+      when('/class', {
+        templateUrl: 'app/partials/class.html',
+        controller: 'ClassController'
+      }).
+
       otherwise({
         redirectTo: '/top'
       });
