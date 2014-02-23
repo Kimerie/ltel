@@ -10,6 +10,14 @@ var ignore_onend;
 var start_timestamp;
 var recognition = new webkitSpeechRecognition();
 
+var updateInterval;
+
+var two_line = /\n\n/g;
+var one_line = /\n/g;
+var current_style;
+var first_char = /\S/;
+
+
 
 var cdexApp = angular.module('cdexApp', [
   'ngRoute' // add controllers here
@@ -117,13 +125,6 @@ var markers = {
 
     ]
 }
-
-var updateInterval;
-
-var two_line = /\n\n/g;
-var one_line = /\n/g;
-var current_style;
-var first_char = /\S/;
 
 
 

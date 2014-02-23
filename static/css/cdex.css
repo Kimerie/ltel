@@ -4,7 +4,7 @@
 	background-color: green;
 	opacity: 0;
 }
- 
+
 .animate-enter.animate-enter-active {
 	opacity: 0.5;
 	background-color: red;
@@ -13,4 +13,14 @@
 .debug {
 	border: 1px dotted red;
 	/*border-right: 1px solid green;*/
+}
+
+.redH {
+   color: red;
+}
+.greenH {
+    color:green;
+}
+.yellowH {
+    color:yellow;
 }
