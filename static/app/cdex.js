@@ -176,6 +176,11 @@ cdexApp.config(['$routeProvider',
         controller: 'ChatController'
       }).
 
+      when('/admin', {
+        templateUrl: 'app/partials/admin.html',
+        controller: 'AdminController'
+      }).
+
       otherwise({
         redirectTo: '/top'
       });
@@ -206,22 +211,40 @@ cdexApp.controller('TopController', function ($scope) {
   GLOBS.score = 7;
   GLOBS.max_score = 10;
   $scope.GLOBS = GLOBS;
+
+  for(var i=1;i<=3; i++) {
+    div = "#topic" + i;
+    console.log(div);
+    $(div).hide(0);
+    $(div).delay(i*100).slideDown(500);
+  }
+
 });
 
 cdexApp.controller('ResultsController', function ($scope) {
   $scope.message = 'results';
   $scope.GLOBS = GLOBS;
+  var score = GLOBS.score || 1;
+  var max_score = GLOBS.max_score || 1;
+  var pct = (100.0 * score) / max_score;
+  console.log(score + "/" + max_score + " : " + pct );
+  
+  $("#scorebox").hide(0);
+  $("#scorebox").width(pct + "%");
+
+  $("#scorebox").delay(250).show(1000);
 });
 
-cdexApp.controller('SkillsController', function ($scope) {
-  
+cdexApp.controller('SkillsController', function ($scope) {  
 });
 
-cdexApp.controller('ChatController', function ($scope) {
-  
+cdexApp.controller('ChatController', function ($scope) {  
 });
-cdexApp.controller('NotebookController', function ($scope) {
-  
+
+cdexApp.controller('NotebookController', function ($scope) {  
+});
+
+cdexApp.controller('AdminController', function ($scope) {
 });
 
 cdexApp.controller('PromptController', function ($scope) {
@@ -437,6 +460,14 @@ function copyButton() {
         recognition.stop();
     }
     updateScore();
+    goResults();
+}
+
+function goResults() {
+    //TODO - fix navigation
+    // $location.path('/results');
+    window.location.href = '#results';
+
 }
 
 function emailButton() {
