@@ -30,6 +30,14 @@ cdexApp.directive('barchart', function() {
         {
           'skill': 'Precision',
           'value': 95
+        },
+        {
+          'skill': 'Transitions',
+          'value': 45
+        },
+        {
+          'skill': 'Caution!',
+          'value': 83
         }
       ];
     
@@ -82,10 +90,16 @@ cdexApp.directive('barchart', function() {
           .enter().append('g')
           .attr("transform", function(d, i) { return "translate(" + i * barWidth + ",0)"; });
 
+
       bar.append('rect')
           .attr('y', function(d) { return y(d.value); })
-          .attr('height', function(d) { return height - y(d.value); })
+          .attr('height', 0)
+          .attr('width', 0)
+        .transition()
+          .delay(function(d, i) { return (i + 2) * 200; })
+          .duration(600)
           .attr('width', barWidth - 10)
+          .attr('height', function(d) { return height - y(d.value); })
           
           
           .style('fill', function(d) {
@@ -93,17 +107,15 @@ cdexApp.directive('barchart', function() {
             // 60 - 80 Yellow
             // 0 - 59 Red
             if (d.value >= 80) {
-              return 'green';
+              return '#2CB171';
             } else if (d.value < 80 && d.value >= 60) {
-              return 'yellow';
+              return '#EBBD19';
             } else if ( d.value < 60) {
-              return 'red';
+              return '#E2493B';
             } else {
               // super error
               return 'purple';
             }
-
-            
           });
 
       bar.append('text')
@@ -122,7 +134,18 @@ cdexApp.directive('barchart', function() {
         .attr("y", 6)
         .attr("dy", ".71em")
         .style("text-anchor", "end")
-        .text("Scores");        
+        .text("Scores");  
+
+
+      // make a line at 80
+      bar.append('line')
+          .attr('x1', x(0))
+          .attr('x2', x(width))
+          .attr('y1', y(80))
+          .attr('y2', y(80))
+          .style("stroke", "#334A53")
+          .style('stroke-opacity', 0.2)
+          .style('stroke-width', '5px');      
     }
   }
 })
