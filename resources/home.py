@@ -13,7 +13,8 @@ def load_resources(app):
 
     @app.route("/")
     def index():
-        return render_template("index.html")
+        return app.send_static_file('base.html')
+        # return render_template("index.html")
 
     @app.route("/top")
     def top():
@@ -24,7 +25,6 @@ def load_resources(app):
         return render_template(
             "events.html",
             casters_host='https://prod-spellchain.herokuapp.com')
-
 
     @app.route("/base")
     def base():
