@@ -11,21 +11,13 @@ cdexApp.config(['$routeProvider',
         templateUrl: 'app/partials/top.html',
         controller: 'TopController'
       }).
-      when('/record', {
-        templateUrl: 'app/partials/record.html',
-        controller: 'RecordController'
-      }).
-      when('/events', {
-        templateUrl: 'app/partials/events.html',
+      when('/topics', {
+        templateUrl: 'app/partials/topics.html',
         controller: 'EventsController'
       }).
       when('/parser', {
         templateUrl: 'app/partials/parser.html',
         controller: 'ParserController'
-      }).      
-      when('/faqs', {
-        templateUrl: 'app/partials/faqs.html',
-        controller: 'FaqsController'
       }).
 
       otherwise({
