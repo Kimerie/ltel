@@ -11,10 +11,17 @@ cdexApp.config(['$routeProvider',
         templateUrl: 'app/partials/top.html',
         controller: 'TopController'
       }).
+
       when('/topics', {
         templateUrl: 'app/partials/topics.html',
         controller: 'EventsController'
       }).
+
+      when('/prompt', {
+        templateUrl: 'app/partials/prompt.html',
+        controller: 'PromptController'
+      }).
+
       when('/parser', {
         templateUrl: 'app/partials/parser.html',
         controller: 'ParserController'
@@ -23,6 +30,21 @@ cdexApp.config(['$routeProvider',
       when('/results', {
         templateUrl: 'app/partials/results.html',
         controller: 'ResultsController'
+      }).
+
+      when('/notebook', {
+        templateUrl: 'app/partials/notebook.html',
+        controller: 'NotebookController'
+      }).
+
+      when('/skills', {
+        templateUrl: 'app/partials/skills.html',
+        controller: 'SkillsController'
+      }).
+
+      when('/chat', {
+        templateUrl: 'app/partials/chat.html',
+        controller: 'ChatController'
       }).
 
       otherwise({
@@ -46,50 +68,6 @@ cdexApp.factory('EventService', function ($http) {
   return EventService;
 })
 
-cdexApp.factory('FaqService', function () {
-  var faqs = [
-    {
-      "question": "ask me a question",
-      "answer": "and i'll give you an answer!"
-    },
-    {
-      "question": "ask me a question",
-      "answer": "and i'll give you an answer!"
-    },
-    {
-      "question": "ask me a question",
-      "answer": "and i'll give you an answer!"
-    },
-    {
-      "question": "ask me a question",
-      "answer": "and i'll give you an answer!"
-    },
-    {
-      "question": "ask me a question",
-      "answer": "and i'll give you an answer!"
-    },
-    {
-      "question": "ask me a question",
-      "answer": "and i'll give you an answer!"
-    },
-    {
-      "question": "ask me a question",
-      "answer": "and i'll give you an answer!"
-    },
-    {
-      "question": "ask me a question",
-      "answer": "and i'll give you an answer!"
-    },
-    {
-      "question": "ask me a question",
-      "answer": "and i'll give you an answer!"
-    }
-  ];
-  return {
-    data: faqs
-  }
-});
-
 
 cdexApp.controller('TopController', function ($scope) {
   $scope.message = 'top page';
@@ -104,6 +82,23 @@ cdexApp.controller('TopController', function ($scope) {
 cdexApp.controller('ResultsController', function ($scope) {
   $scope.message = 'results';
   $scope.GLOBS = GLOBS;
+});
+
+cdexApp.controller('SkillsController', function ($scope) {
+  
+});
+
+cdexApp.controller('ChatController', function ($scope) {
+  
+});
+cdexApp.controller('NotebookController', function ($scope) {
+  
+});
+
+cdexApp.controller('PromptController', function ($scope) {
+  $scope.GLOBS = GLOBS;
+  $scope.topic = "Sleep Deprivation";
+  $scope.intro = "are you sleep deprived? Tell us about it!";
 });
 
 
