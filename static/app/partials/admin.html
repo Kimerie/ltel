@@ -8,6 +8,7 @@
 
 	.axis text {
   font: 10px sans-serif;
+  font-family: "Helvetica Neue";
 }
 
 .axis path,
@@ -17,7 +18,9 @@
   shape-rendering: crispEdges;
 }
 
-
+.hovered {
+	background-color: 'black';
+}
 	body {
   font: 14px Helvetica Neue;
   text-rendering: optimizeLegibility;
@@ -25,7 +28,7 @@
   overflow-y: scroll;
 }
 .label {
-  font-size: .65em;
+  font-size: .95em;
 }
 body {
   width: 960px;
@@ -39,6 +42,19 @@ h1 {
 .error {
   color: red;
 	}
+
+rect.tooltip {   
+  position: absolute;           
+  text-align: center;           
+  width: 60px;                  
+  height: 28px;                 
+  padding: 2px;             
+  font: 12px sans-serif;        
+  background: lightsteelblue;
+  border: 0px;      
+  border-radius: 8px;           
+  pointer-events: none;         
+}
 </style>
 
  <div class="row">
@@ -49,7 +65,16 @@ h1 {
 		<barchart></barchart>
         
 	</div>
+</div>
 
+<div class="row">
+	<div class="debug small-9 large-12 columns">
+
+		<ul class="button-group radius round">
+	  		<li><a href="#classdata" class="button">More Class Data</a></li>
+	  		<li><a href="#results" class="button">Results</a></li>
+		</ul>
+	</div>
 </div>
 
 

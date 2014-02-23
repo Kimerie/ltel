@@ -100,8 +100,6 @@ cdexApp.directive('barchart', function() {
           .duration(600)
           .attr('width', barWidth - 10)
           .attr('height', function(d) { return height - y(d.value); })
-          
-          
           .style('fill', function(d) {
             // 80+ Green
             // 60 - 80 Yellow
@@ -119,6 +117,8 @@ cdexApp.directive('barchart', function() {
           });
 
       bar.append('text')
+          .transition()
+           .delay(function(d, i) { return (i + 2) * 250; })
           .attr('x', barWidth / 2)
           .attr('y', function(d) { return y(d.value) + 3; })
           .attr('dy', '.75em')
@@ -146,6 +146,26 @@ cdexApp.directive('barchart', function() {
           .style("stroke", "#334A53")
           .style('stroke-opacity', 0.2)
           .style('stroke-width', '5px');      
+    
+
+      var labels = chart.selectAll("text.label")
+            .data(data)
+          .enter().append("text")
+            .attr("class", "label")
+            .attr("transform", function(d, i) { return "translate(" + ((i * barWidth) + barWidth / 2)+ ",0)"; })
+            .attr("y", height + 6)
+            .attr("dx", x({x: .45}))
+            .attr("dy", ".71em")
+            .attr("text-anchor", "middle")
+            .text(function(d, i) {
+              return d.skill;
+            });
+
+
+
+      // add hover event handlers
+   
+
     }
   }
 })
