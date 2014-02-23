@@ -1,8 +1,131 @@
 console.log("loading cdexApp");
 
+
+var GLOBS = {};   // hacky global for passing stuff around
+
+var recognizing = false;
+var create_email = false;
+var final_transcript = '';
+var ignore_onend;
+var start_timestamp;
+var recognition = new webkitSpeechRecognition();
+
+
 var cdexApp = angular.module('cdexApp', [
   'ngRoute' // add controllers here
 ]);
+var langs =
+    [['Afrikaans',       ['af-ZA']],
+        ['Bahasa Indonesia',['id-ID']],
+        ['Bahasa Melayu',   ['ms-MY']],
+        ['Català',          ['ca-ES']],
+        ['Čeština',         ['cs-CZ']],
+        ['Deutsch',         ['de-DE']],
+        ['English',         ['en-AU', 'Australia'],
+            ['en-CA', 'Canada'],
+            ['en-IN', 'India'],
+            ['en-NZ', 'New Zealand'],
+            ['en-ZA', 'South Africa'],
+            ['en-GB', 'United Kingdom'],
+            ['en-US', 'United States']],
+        ['Español',         ['es-AR', 'Argentina'],
+            ['es-BO', 'Bolivia'],
+            ['es-CL', 'Chile'],
+            ['es-CO', 'Colombia'],
+            ['es-CR', 'Costa Rica'],
+            ['es-EC', 'Ecuador'],
+            ['es-SV', 'El Salvador'],
+            ['es-ES', 'España'],
+            ['es-US', 'Estados Unidos'],
+            ['es-GT', 'Guatemala'],
+            ['es-HN', 'Honduras'],
+            ['es-MX', 'México'],
+            ['es-NI', 'Nicaragua'],
+            ['es-PA', 'Panamá'],
+            ['es-PY', 'Paraguay'],
+            ['es-PE', 'Perú'],
+            ['es-PR', 'Puerto Rico'],
+            ['es-DO', 'República Dominicana'],
+            ['es-UY', 'Uruguay'],
+            ['es-VE', 'Venezuela']],
+        ['Euskara',         ['eu-ES']],
+        ['Français',        ['fr-FR']],
+        ['Galego',          ['gl-ES']],
+        ['Hrvatski',        ['hr_HR']],
+        ['IsiZulu',         ['zu-ZA']],
+        ['Íslenska',        ['is-IS']],
+        ['Italiano',        ['it-IT', 'Italia'],
+            ['it-CH', 'Svizzera']],
+        ['Magyar',          ['hu-HU']],
+        ['Nederlands',      ['nl-NL']],
+        ['Norsk bokmål',    ['nb-NO']],
+        ['Polski',          ['pl-PL']],
+        ['Português',       ['pt-BR', 'Brasil'],
+            ['pt-PT', 'Portugal']],
+        ['Română',          ['ro-RO']],
+        ['Slovenčina',      ['sk-SK']],
+        ['Suomi',           ['fi-FI']],
+        ['Svenska',         ['sv-SE']],
+        ['Türkçe',          ['tr-TR']],
+        ['български',       ['bg-BG']],
+        ['Pусский',         ['ru-RU']],
+        ['Српски',          ['sr-RS']],
+        ['한국어',            ['ko-KR']],
+        ['中文',             ['cmn-Hans-CN', '普通话 (中国大陆)'],
+            ['cmn-Hans-HK', '普通话 (香港)'],
+            ['cmn-Hant-TW', '中文 (台灣)'],
+            ['yue-Hant-HK', '粵語 (香港)']],
+        ['日本語',           ['ja-JP']],
+        ['Lingua latīna',   ['la']]];
+
+var markers = {
+    "markers": [
+        {
+            "key": "transitions",
+            "search": [ "for example", "when", "because", "so", "hello", "test", "what"],
+            "position": ["start"],
+            "score": 2
+        },
+
+        {
+            "key": "complexity",
+            "search": [
+                "for", "and", "nor", "but", "or", "yet", "so"
+            ],
+            "position": ["middle"],
+            "score": 1
+        },
+
+
+        {
+            "key": "badwords",
+            "search": [
+                "for", "thing", "like", "you know", "good", "umm", "just is"
+            ],
+            "position": ["anywhere"],
+            "score": -1
+        },
+
+        {
+            "key": "precision",
+            "search": [
+                "lots"
+            ],
+            "position": ["anywhere"],
+            "score": 1
+        },
+
+    ]
+}
+
+var updateInterval;
+
+var two_line = /\n\n/g;
+var one_line = /\n/g;
+var current_style;
+var first_char = /\S/;
+
+
 
 cdexApp.config(['$routeProvider',
   function ($routeProvider) {
@@ -160,150 +283,7 @@ function parseBad(blob) {
 }
 
 
-var markers = {
-  "markers": [
-    {
-      "key": "transitions",
-      "search": [ "for example", "when", "because", "so", "hello","test", "and"],
-      "position": ["start"]
-    },
-
-    {
-      "key": "complexity",
-      "search": [ 
-        "for", "and", "nor", "but", "or", "yet", "so"
-        ],
-      "position": ["middle"]
-    },
-
-
-    {
-      "key": "badwords",
-      "search": [ 
-        "for", "thing", "like", "you know", "good", "umm", "just is"
-        ],
-      "position": ["anywhere"],
-      "score": -1
-    },
-
-    {
-      "key": "precision",
-      "search": [ 
-        "lots"
-        ],
-      "position": ["anywhere"],
-      "score": 1
-    },
-
-  ]
-}
-
-
 ///////////////////
-var langs =
-    [['Afrikaans',       ['af-ZA']],
-        ['Bahasa Indonesia',['id-ID']],
-        ['Bahasa Melayu',   ['ms-MY']],
-        ['Català',          ['ca-ES']],
-        ['Čeština',         ['cs-CZ']],
-        ['Deutsch',         ['de-DE']],
-        ['English',         ['en-AU', 'Australia'],
-            ['en-CA', 'Canada'],
-            ['en-IN', 'India'],
-            ['en-NZ', 'New Zealand'],
-            ['en-ZA', 'South Africa'],
-            ['en-GB', 'United Kingdom'],
-            ['en-US', 'United States']],
-        ['Español',         ['es-AR', 'Argentina'],
-            ['es-BO', 'Bolivia'],
-            ['es-CL', 'Chile'],
-            ['es-CO', 'Colombia'],
-            ['es-CR', 'Costa Rica'],
-            ['es-EC', 'Ecuador'],
-            ['es-SV', 'El Salvador'],
-            ['es-ES', 'España'],
-            ['es-US', 'Estados Unidos'],
-            ['es-GT', 'Guatemala'],
-            ['es-HN', 'Honduras'],
-            ['es-MX', 'México'],
-            ['es-NI', 'Nicaragua'],
-            ['es-PA', 'Panamá'],
-            ['es-PY', 'Paraguay'],
-            ['es-PE', 'Perú'],
-            ['es-PR', 'Puerto Rico'],
-            ['es-DO', 'República Dominicana'],
-            ['es-UY', 'Uruguay'],
-            ['es-VE', 'Venezuela']],
-        ['Euskara',         ['eu-ES']],
-        ['Français',        ['fr-FR']],
-        ['Galego',          ['gl-ES']],
-        ['Hrvatski',        ['hr_HR']],
-        ['IsiZulu',         ['zu-ZA']],
-        ['Íslenska',        ['is-IS']],
-        ['Italiano',        ['it-IT', 'Italia'],
-            ['it-CH', 'Svizzera']],
-        ['Magyar',          ['hu-HU']],
-        ['Nederlands',      ['nl-NL']],
-        ['Norsk bokmål',    ['nb-NO']],
-        ['Polski',          ['pl-PL']],
-        ['Português',       ['pt-BR', 'Brasil'],
-            ['pt-PT', 'Portugal']],
-        ['Română',          ['ro-RO']],
-        ['Slovenčina',      ['sk-SK']],
-        ['Suomi',           ['fi-FI']],
-        ['Svenska',         ['sv-SE']],
-        ['Türkçe',          ['tr-TR']],
-        ['български',       ['bg-BG']],
-        ['Pусский',         ['ru-RU']],
-        ['Српски',          ['sr-RS']],
-        ['한국어',            ['ko-KR']],
-        ['中文',             ['cmn-Hans-CN', '普通话 (中国大陆)'],
-            ['cmn-Hans-HK', '普通话 (香港)'],
-            ['cmn-Hant-TW', '中文 (台灣)'],
-            ['yue-Hant-HK', '粵語 (香港)']],
-        ['日本語',           ['ja-JP']],
-        ['Lingua latīna',   ['la']]];
-
-var markers = {
-    "markers": [
-        {
-            "key": "transitions",
-            "search": [ "for example", "when", "because", "so", "hello", "test", "what"],
-            "position": ["start"],
-            "score": 2
-        },
-
-        {
-            "key": "complexity",
-            "search": [
-                "for", "and", "nor", "but", "or", "yet", "so"
-            ],
-            "position": ["middle"],
-            "score": 1
-        },
-
-
-        {
-            "key": "badwords",
-            "search": [
-                "for", "thing", "like", "you know", "good", "umm", "just is"
-            ],
-            "position": ["anywhere"],
-            "score": -1
-        },
-
-        {
-            "key": "precision",
-            "search": [
-                "lots"
-            ],
-            "position": ["anywhere"],
-            "score": 1
-        },
-
-    ]
-}
-
 
 function updateCountry() {
     for (var i = select_dialect.options.length - 1; i >= 0; i--) {
@@ -316,14 +296,6 @@ function updateCountry() {
     select_dialect.style.visibility = list[1].length == 1 ? 'hidden' : 'visible';
 }
 
-var GLOBS = {};   // hacky global for passing stuff around
-
-var recognizing = false;
-var create_email = false;
-var final_transcript = '';
-var ignore_onend;
-var start_timestamp;
-var recognition = new webkitSpeechRecognition();
 
 function recordStartup() {
   console.log('recordStartup');
@@ -405,7 +377,6 @@ function recordStartup() {
         //var find = 'Hello';
         //var tmpstr = '<span class="red">'+find+'</span>';
         //final_transcript =  replaceAll(find, tmpstr, final_transcript);
-        formatText();
         final_span.innerHTML = linebreak(final_transcript);
         interim_span.innerHTML = linebreak(interim_transcript);
         if (final_transcript || interim_transcript) {
@@ -423,13 +394,11 @@ function upgrade() {
     showInfo('info_upgrade');
 }
 
-var two_line = /\n\n/g;
-var one_line = /\n/g;
+
 function linebreak(s) {
     return s.replace(two_line, '<p></p>').replace(one_line, '<br>');
 }
 
-var first_char = /\S/;
 function capitalize(s) {
     return s.replace(first_char, function(m) { return m.toUpperCase(); });
 }
@@ -453,9 +422,10 @@ function copyButton() {
     }
     if (recognizing) {
         recognizing = false;
+        window.clearInterval(updateInterval);  // stop updating store and formt
         recognition.stop();
     }
-
+    updateScore();
 }
 
 function emailButton() {
@@ -473,10 +443,12 @@ function emailButton() {
 function replaceAll(find, replace, str) {
     return str.replace(new RegExp(find, 'g'), replace);
 }
-function formatText() {
-   // console.log("formatText");
+
+function updateScore() {
     var items = [];
     var score = 0;
+    var j = 0;
+    var colorClass = ["greenH", "yellowH", "redH", "yellowH"];
     itmes = markers.markers;
     for(var data in markers.markers) {
         var s = markers.markers[data];
@@ -485,27 +457,31 @@ function formatText() {
         for(var i = 0; i < search.length; i++) {
             var find = search[i];
             if(final_transcript.search(find) !== -1) {
+
                 score += parseInt(s.score);
                 console.log("update score === "+score);
 
-                var tmpstr = '<span class="redH">'+find+'</span>';
+                var tmpstr = '<span class='+colorClass[j]+'>'+find+'</span>';
                 final_transcript =  replaceAll(find, tmpstr, final_transcript);
             }
         }
-
+        j++;
     }
-
+    GLOBS.score = score;
     var scoreText = document.getElementById("scoreTextId");
     scoreText.innerHTML= "<h4>Score: "+score+"</h4>";
-
-    //return score;
-    ///{{blob.score = score}};
 }
+
+
+
+
 function startButton(event) {
     if (recognizing) {
+        window.clearInterval(updateInterval);  // stop updating store and formt
         recognition.stop();
         return;
     }
+    updateInterval = setInterval(function() {updateScore()}, 1000);  // start formating and updating score
     final_transcript = '';
     recognition.lang = select_dialect.value;
     recognition.start();
@@ -531,7 +507,6 @@ function showInfo(s) {
     }
 }
 
-var current_style;
 function showButtons(style) {
     if (style == current_style) {
         return;
