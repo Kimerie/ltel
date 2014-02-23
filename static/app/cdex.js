@@ -111,10 +111,6 @@ cdexApp.config(['$routeProvider',
         controller: 'PromptController'
       }).
 
-      when('/prompt-text', {
-        templateUrl: 'app/partials/prompt-text.html',
-      }).
-
       when('/parser', {
         templateUrl: 'app/partials/parser.html',
         controller: 'ParserController'
@@ -670,151 +666,61 @@ function goResults() {
 
 
 var markers = [
-    {
-        "key": "transition",
-        "search": [
-            "for example",
-            "in my opinion",
-            "in my experience",
-            "my perspective",
-            "my point of view",
-            "based on",
-            "according to",
-            "as a result",
-            "therefore",
-            "in conclusion",
-            "to conclude",
-            "one reason",
-            "first",
-            "second",
-            "third",
-            "lastly",
-            "firstly",
-            "one could argue",
-            "for instance",
-            "to illustrate",
-            "in the text",
-            "in addition",
-            "additionally",
-            "also",
-            "i think",
-            "i believe",
-            "personally"
-        ],
-        "position": [
-            "start"
-        ],
-        "score": 10,
-        "klass": "transition10"
-    },
-    {
-        "key": "fanboys",
-        "search": [
-            "for",
-            "and",
-            "nor",
-            "but",
-            "or",
-            "yet",
-            "so",
-            "because"
-        ],
-        "position": [
-            "middle"
-        ],
-        "score": 20,
-        "klass": "fanboys"
-    },
-    {
-        "key": "vocabulary",
-        "search": [
-            "adolescent"
-        ],
-        "position": [
-            "start"
-        ],
-        "score": 10,
-        "klass": "precision10"
-    },
-    {
-        "key": "precision",
-        "search": [
-            "good",
-            "bad",
-            "a lot",
-            "better",
-            "worse",
-            "hard",
-            "easy",
-            "fun",
-            "little",
-            "sad",
-            "happy",
-            "laugh",
-            "big",
-            "walk",
-            "slow",
-            "fast",
-            "fat",
-            "small",
-            "nice",
-            "pretty",
-            "scared",
-            "angry",
-            "said",
-            "love",
-            "run",
-            "saw",
-            "smart",
-            "talk"
-        ],
-        "position": [
-            "anywhere"
-        ],
-        "score": -10,
-        "klass": "precision30"
-    },
-    {
-        "key": "caution",
-        "search": [
-            "thing",
-            "like",
-            "whatever",
-            "sometime",
-            "dunno",
-            "sorta",
-            "for",
-            "you know",
-            "good",
-            "umm",
-            "just",
-            "kind of",
-            "err",
-            "kinda",
-            "sort of",
-            "cool"
-        ],
-        "position": [
-            "anywhere"
-        ],
-        "score": -20,
-        "klass": "caution20"
-    }
-]
-        // {
-        //     "key": "vocabulary",
-        //     "search": [
-        //           "abbreviate", "abstract", "according", "acronym", "address", "affect", "alter", "always", "analogy", "analysis", "analyze", 
-        //           "annotate", "anticipate", "application", "apply", "approach", "appropriate", "approximate", "argue", "argument", "arrange", 
-        //           "articulate", "aspects", "assemble", "assert", "assess", "associate", "assume", "assumption", "audience", "authentic", "background", 
-        //           "body", "brainstorm", "brief", "calculate", "caption", "category", "cause", "character", "characteristic", "characterize", "chart", "chronology", 
-        //           "citation", "cite", "claim", "clarify", "class", "clue", "code", "coherent", "common", "compare", "compile", "complement", "complete", "compose", "composition", "conceive", "concise", "conclude", "conclusion", "concrete", "conditions", "conduct", "confirm", "consequence", "consider", "consist", "consistent", "consistently", "constant", "constitutes", "consult", "contend", "context", 
-        //           "continuum", "contradict", "control", "convert", "convey", "copy", "correlate", "correspond", "credible", "credit", "criteria", "critique", "crucial", "cumulative", "debate", "deduce", "defend", "define", "demand", "demonstrate", "depict", "derive", "describe", "detail", "detect", "determine", "develop", "devise", "diction", "differentiate", "dimension", "diminish", "direct", "discipline", "discover", "discriminate", "discuss", "distinguish", "domain", "draft", "draw", "edit", "effect", "elements", "emphasize", "employ", "equal", "equivalent", "essay", "essential", "establish", "estimate", "evaluate", "event", "evidence", "exaggerate", "examine", "example", "excerpt", "exclude", "exercise", "exhibit", "explain", "explore", "expository", "extract", "fact", "factor", "feature", "figurative", "figure", "focus", "footer", "foreshadow", "form", "format", "former", "formulate", "fragment", "frame", "frequently", "general", "genre", "graph", "graphic", "header", "heading", "highlight", "hypothesize", "identify", "illustrate", "imitate", "imply", "inclined", "include", "incorporate", "indicate", "indirect", "infer", "influence", "inform", "inquire", "instructions", "integrate", "intent", "intention", "interact", "intermittent", "interpret", "introduce", "introduction", "invariably", "investigate", "involve", "irony", "irrelevant", "isolate", "italics", "judge", "key", "label", "likely", "list", "literal", "locate", "logical", "main", "margin", "mean", "measure", "metaphor", "method", "model", "modify", "monitor", "motivation", "narrative", "narrator", "never", "notation", "note", "notice", "objective", "observe", "occur", "opinion", "oppose", "optional", "order", "organize", "origins", "outline", "pace", "paraphrase", "participation", "passage", "pattern", "perform", "perspective", "persuade", "place", "plagiarism", "plan", "plausible", "plot", "point", "point of view", "portray", "possible", "preclude", "predict", "prefix", "prepare", "presume", "preview", "previous", "primary", "prior", "probably", "procedure", "process", "produce", "profile", "project", "prompt", "proofread", "property", "propose", "prose", "prove", "purpose", "quotation", "quote", "rank", "rare", "rarely", "reaction", "recall", "reduce", "refer", "reflect", "regular", "relate", "relationship", "relevant", "rephrase", "report", "represent", "representative", "request", "require", "requisite", "respond", "responsible", "restate", "results", "reveal", "review", "revise", "root", "rule", "scan", "score", "sequence", "series", "set", "setting", "show", "signal", "significance", "simile", "skim", "solve", "source", "spatial", "specific", "speculate", "stance", "standard", "state", "statement", "strategy", "structure", "study", "style", "subject", "subjective", "subsequent", "substitute", "succinct", "suggest", "sum", "summarize", "summary", "support", "survey", "symbolize", "synonym", "synthesize", "table", "technique", "term", "test", "theme", "thesis", "timeline", "tone", "topic", "trace", "trait", "transition", "translate", "typically", "unique", "utilize", "valid", "variation", "vary", "verify", "viewpoint", "voice"
-        //           ],
-        //           "position": ["anywhere"],
-        //           "score": 30,
-        //           "klass": "precision30"
-        // }
+        {
+            "key": "transition",
+            "search": [ "for example", "when", "because", "so", "hello", "test", "what", "meantime"],
+            "position": ["start"],
+            "score": 10,
+            "klass": "transition10"
+        },
 
-    
+        {
+            "key": "fanboys",
+            "search": [
+                "for", "and", "nor", "but", "or", "yet", "so"
+            ],
+            "position": ["middle"],
+            "score": 20,
+            "klass": "fanboys"
+        },
+
+        {
+            "key": "vocabulary",
+            "search": [ "great", "wonderful", "improve", "exhausted", "sleepwalking", "slurred" ],
+            "position": ["start"],
+            "score": 10,
+            "klass": "precision10"
+        },
+
+        {
+            "key": "precision",
+            "search": [
+                "exactly", "precisely", "specifically", "approximately"
+            ],
+            "position": ["anywhere"],
+            "score": 30,
+            "klass": "precision30"
+        },
+
+        {
+            "key": "caution",
+            "search": [
+                "for", "you know", "good", "umm", "just", "kind of", "err", "kinda", "sort of"
+            ],
+            "position": ["anywhere"],
+            "score": -10,
+            "klass": "caution10"
+        },
+
+        {
+            "key": "caution",
+            "search": [
+                "thing", "like", "whatever", "sometime", "dunno", "sorta"
+            ],
+            "position": ["anywhere"],
+            "score": -20,
+            "klass": "caution20"
+        }
+
+    ]
 
