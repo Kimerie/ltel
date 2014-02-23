@@ -85,7 +85,6 @@ cdexApp.factory('FaqService', function () {
       "answer": "and i'll give you an answer!"
     }
   ];
-
   return {
     data: faqs
   }
@@ -94,29 +93,19 @@ cdexApp.factory('FaqService', function () {
 
 cdexApp.controller('TopController', function ($scope) {
   $scope.message = 'top page';
+
+  // TODO better way to persist data across URLs
+  GLOBS.state = "top";
+  GLOBS.score = 7;
+  GLOBS.max_score = 10;
+  $scope.GLOBS = GLOBS;
 });
 
 cdexApp.controller('ResultsController', function ($scope) {
   $scope.message = 'results';
+  $scope.GLOBS = GLOBS;
 });
 
-
-cdexApp.controller('EventsController', function ($scope, EventService) {
-  $scope.message = 'events here';
-  EventService.async().then(function (data) {
-    $scope.events = data.schedules;
-  });
-});
-
-cdexApp.controller('FaqsController', function ($scope, FaqService) {
-  $scope.message = 'Just the FAQs';
-  $scope.faqs = FaqService.data;
-});
-
-
-cdexApp.controller('RecordController', function ($scope) {
-  $scope.message = 'recording!';
-});
 
 cdexApp.directive('cxNavBarItem', function ($location) {
   return {
@@ -175,7 +164,7 @@ var markers = {
   "markers": [
     {
       "key": "transitions",
-      "search": [ "for example", "when", "because", "so"],
+      "search": [ "for example", "when", "because", "so", "hello","test", "and"],
       "position": ["start"]
     },
 
@@ -279,7 +268,7 @@ var markers = {
     "markers": [
         {
             "key": "transitions",
-            "search": [ "for example", "when", "because", "so"],
+            "search": [ "for example", "when", "because", "so", "hello", "test", "what"],
             "position": ["start"],
             "score": 2
         },
@@ -326,6 +315,8 @@ function updateCountry() {
     }
     select_dialect.style.visibility = list[1].length == 1 ? 'hidden' : 'visible';
 }
+
+var GLOBS = {};   // hacky global for passing stuff around
 
 var recognizing = false;
 var create_email = false;
@@ -464,10 +455,7 @@ function copyButton() {
         recognizing = false;
         recognition.stop();
     }
-    //  formatText();
-    //  copy_button.style.display = 'none';
-    //  copy_info.style.display = 'inline-block';
-    // showInfo('');
+
 }
 
 function emailButton() {
@@ -486,7 +474,9 @@ function replaceAll(find, replace, str) {
     return str.replace(new RegExp(find, 'g'), replace);
 }
 function formatText() {
+   // console.log("formatText");
     var items = [];
+    var score = 0;
     itmes = markers.markers;
     for(var data in markers.markers) {
         var s = markers.markers[data];
@@ -494,15 +484,24 @@ function formatText() {
         search = s.search;
         for(var i = 0; i < search.length; i++) {
             var find = search[i];
-            var tmpstr = '<span class="red">'+find+'</span>';
-            final_transcript =  replaceAll(find, tmpstr, final_transcript);
+            if(final_transcript.search(find) !== -1) {
+                score += parseInt(s.score);
+                console.log("update score === "+score);
+
+                var tmpstr = '<span class="redH">'+find+'</span>';
+                final_transcript =  replaceAll(find, tmpstr, final_transcript);
+            }
         }
 
     }
 
+    var scoreText = document.getElementById("scoreTextId");
+    scoreText.innerHTML= "<h4>Score: "+score+"</h4>";
+
+    //return score;
+    ///{{blob.score = score}};
 }
 function startButton(event) {
-    console.log("startButton, recognition:", recognition);
     if (recognizing) {
         recognition.stop();
         return;
