@@ -219,8 +219,15 @@ cdexApp.controller('TopController', function ($scope) {
 cdexApp.controller('ResultsController', function ($scope) {
   $scope.message = 'results';
   $scope.GLOBS = GLOBS;
-  $("#scorebox").hide(0); 
-  $("#scorebox").delay(500).show(1000);
+  var score = GLOBS.score || 1;
+  var max_score = GLOBS.max_score || 1;
+  var pct = (100.0 * score) / max_score;
+  console.log(score + "/" + max_score + " : " + pct );
+  
+  $("#scorebox").hide(0);
+  $("#scorebox").width(pct + "%");
+
+  $("#scorebox").delay(250).show(1000);
 });
 
 cdexApp.controller('SkillsController', function ($scope) {  

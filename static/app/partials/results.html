@@ -1,14 +1,15 @@
 <div class="row">
-    <h1>results</h1>
+    <h1>Score: {{GLOBS.score}}/{{GLOBS.max_score}}</h1>
 
-	<div data-alert class="alert-box warning round" id="scorebox">
-		<h3>score: {{GLOBS.score}}/{{GLOBS.max_score}}</h3>
-	</div>
+    <div class="progress success round" style="border: 1px solid black; height:100px">
+        <span class="meter" id="scorebox">
+        </span>
+    </div>
 
     <div class='blob'>
-    	your parsed text goes here
+    	<!-- parsed text goes here -->
     </div>
-    
+
     <div>
         <h3>achievements</h3>
         <a href="#skills">
