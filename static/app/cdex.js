@@ -209,6 +209,11 @@ cdexApp.controller('ResultsController', function ($scope) {
   $("#scorebox").width($scope.pct_score + "%");
 
   $("#scorebox").delay(250).show(1000);
+
+  // $scope.blob = GLOBS.blob;   // persist VTT
+  console.log(GLOBS.blob);
+  $("#vtt-out").html(GLOBS.blob);
+
 });
 
 cdexApp.controller('SkillsController', function ($scope) {  
@@ -601,6 +606,10 @@ function linebreak(s) {
     return s.replace(two_line, '<p></p>').replace(one_line, '<br>');
 }
 
+function checkIt() {
+    goResults();
+}
+
 // function capitalize(s) {
 //     return s.replace(first_char, function(m) { return m.toUpperCase(); });
 // }
@@ -633,10 +642,10 @@ function linebreak(s) {
 
 function goResults() {
     console.log("final_transcript:", final_transcript);
+    GLOBS.blob = $("#vtt-out").html();
     //TODO - fix navigation
     // $location.path('/results');
     window.location.href = '#results';
-
 }
 
 

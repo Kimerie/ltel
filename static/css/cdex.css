@@ -15,6 +15,12 @@
 	/*border-right: 1px solid green;*/
 }
 
+.score {
+	font-size: 36px;
+	text-align: center;
+	background-color: yellow;
+	color: black;
+}
 
 .redH {
 	background: red;
@@ -63,12 +69,14 @@
 
 .interim_vtt {
 	font-size: 18px;
-	border: 1px dotted red;
+	border: 1px dotted #ccc;
+	padding: 10px;
+	color: #444;
 }
 
 .vtt-out {
 	font-size: 50px;
-	border: 2px solid black;
+	border: 1px solid #ddd;
 	padding: 10px;
 	line-height: 200%;
 }

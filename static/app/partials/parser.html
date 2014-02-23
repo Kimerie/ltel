@@ -3,22 +3,18 @@ Click the "Allow" <br/>
 button above
 </div>
 
-<div class="row ctr">
- 	<h1>Rock Your Voice!</h1>
-</div>
+<hr>
 
 <div class="row">
 
 	<div class="debug small-2 large-2 columns">
-	<h3>skills</h3>
+
+  <div class='score'>
+    <h4>score:</h4>
+    <div id="scoreTextId">__</div>
+  </div>
 
 	<dl class="accordion" data-accordion>
-		<dd>
-			<div id="scoreTextId">
-        <h4>Score: </h4>
-			</div>
-		</dd>
-
 		<dd>
 			<a href="">Transition
 			<div class="progress radius round">
@@ -72,17 +68,15 @@ button above
   <!-- content panel -->
 
 	<div class="debug small-10 large-10 columns ctr">
-    <p id="info_start">Click on the microphone icon and begin speaking.</p>
 
     <button id="start_button" onclick="startButton(event)" class="expand">
       <img id="start_img" src="/img/mic.gif" alt="Start" />
     </button>
 
-    <div id="vtt-out" class="vtt-out">final</div>
-    <div id="interim_vtt" class="interim_vtt">interim</div>
+    <div id="vtt-out" class="vtt-out">click the microphone icon and Rock Your Voice!</div>
+    <div id="interim_vtt" class="interim_vtt">[ready]...</div>
 
-    <hr>
-    <button id="copy_button" class="button" onclick="copyButton()">Check It!</button>
+    <button id="copy_button" class="button green expand" onclick="checkIt()">Check It!</button>
 
   </div>
 
