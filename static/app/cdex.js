@@ -149,9 +149,10 @@ cdexApp.directive('cxNavBarItem', function ($location) {
 //// parser page
 
 cdexApp.controller('ParserController', function ($scope) {
+  console.log("ParserController.init");
   recordStartup();
-  $scope.message = 'parsing!';
-  $scope.blob = parseAll("");
+  // $scope.message = 'parsing!';
+  // $scope.blob = parseAll("");
 });
 
 
@@ -313,16 +314,6 @@ var markers = {
     ]
 }
 
-function recordStartup() {
-  for (var i = 0; i < langs.length; i++) {
-      select_language.options[i] = new Option(langs[i][0], i);
-  }
-  select_language.selectedIndex = 6;
-  updateCountry();
-  select_dialect.selectedIndex = 6;
-  showInfo('info_start');  
-}
-
 
 function updateCountry() {
     for (var i = select_dialect.options.length - 1; i >= 0; i--) {
@@ -335,16 +326,27 @@ function updateCountry() {
     select_dialect.style.visibility = list[1].length == 1 ? 'hidden' : 'visible';
 }
 
+var recognizing = false;
 var create_email = false;
 var final_transcript = '';
-var recognizing = false;
 var ignore_onend;
 var start_timestamp;
-if (!('webkitSpeechRecognition' in window)) {
-    upgrade();
-} else {
+var recognition = new webkitSpeechRecognition();
+
+function recordStartup() {
+  console.log('recordStartup');
+
+  for (var i = 0; i < langs.length; i++) {
+      select_language.options[i] = new Option(langs[i][0], i);
+  }
+  select_language.selectedIndex = 6;
+  updateCountry();
+  select_dialect.selectedIndex = 6;
+  
+  if (!('webkitSpeechRecognition' in window)) {
+      upgrade();
+  } else {
     start_button.style.display = 'inline-block';
-    var recognition = new webkitSpeechRecognition();
     recognition.continuous = true;
     recognition.interimResults = true;
 
@@ -421,6 +423,8 @@ if (!('webkitSpeechRecognition' in window)) {
 
     };
 }
+}
+
 
 function upgrade() {
     start_button.style.visibility = 'hidden';
@@ -497,9 +501,9 @@ function formatText() {
 
 }
 function startButton(event) {
+    console.log("startButton, recognition:", recognition);
     if (recognizing) {
         recognition.stop();
-
         return;
     }
     final_transcript = '';
