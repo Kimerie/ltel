@@ -147,7 +147,7 @@ cdexApp.config(['$routeProvider',
       }).
 
       when('/parser', {
-        templateUrl: 'app/partials/parser2.html',
+        templateUrl: 'app/partials/parser.html',
         controller: 'ParserController'
       }).
 
