@@ -20,6 +20,11 @@ cdexApp.config(['$routeProvider',
         controller: 'ParserController'
       }).
 
+      when('/results', {
+        templateUrl: 'app/partials/results.html',
+        controller: 'ResultsController'
+      }).
+
       otherwise({
         redirectTo: '/top'
       });
@@ -89,6 +94,10 @@ cdexApp.factory('FaqService', function () {
 
 cdexApp.controller('TopController', function ($scope) {
   $scope.message = 'top page';
+});
+
+cdexApp.controller('ResultsController', function ($scope) {
+  $scope.message = 'results';
 });
 
 
