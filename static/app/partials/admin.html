@@ -1,36 +1,45 @@
 
-<!-- 
-TODO - fix accordions
-http://foundation.zurb.com/forum/posts/536-accordion-click
--->
+<style type="text/css">
+
+	svg {
+		width: 100%;
+	}
+
+	tspan {
+		color: #fff333;
+	}
+
+
+	body {
+  font: 14px Helvetica Neue;
+  text-rendering: optimizeLegibility;
+  margin-top: 1em;
+  overflow-y: scroll;
+}
+.label {
+  font-size: .65em;
+}
+body {
+  width: 960px;
+  margin: auto;
+}
+h1 {
+  font-size: 36px;
+  font-weight: 300;
+  margin-bottom: .3em;
+}
+.error {
+  color: red;
+	}
+</style>
 
  <div class="row">
-	<div class="debug small-3 large-3 columns">
 
-		<dl class="accordion" data-accordion>
-			<h3>class data</h3>
 
-			<dd>
-				<a href="#results" ng-click="do()">Class 1</a>
-				<div id="panel1" class="content">
-				details on class 1
-				</div>
-			</dd>
-
-			<dd>
-				<a href="#panel2" ng-click="do()">Class 2</a>
-				<div id="panel2" class="content">
-				details on class 2
-				</div>
-			</dd>
-
-		</dl>
-	</div>
-
-	<div class="debug small-9 large-9 columns">
+	<div class="debug small-9 large-12 columns">
 		<h2>Classroom Data</h2>
 		<barchart></barchart>
-        <div id="class-canvas">hi</div>
+        
 	</div>
 
 </div>

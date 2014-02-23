@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="500px" height="317px" viewBox="0 0 500 317" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <title>barGraph</title>
+    <description>Created with Sketch (http://www.bohemiancoding.com/sketch)</description>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <rect id="Rectangle-2" stroke="#353031" stroke-width="3" fill="#515151" sketch:type="MSShapeGroup" x="0" y="297" width="500" height="20"></rect>
+        <rect id="bar-graphic" stroke="#353031" stroke-width="3" fill="#F6F6F6" sketch:type="MSShapeGroup" x="0" y="0" width="500" height="300"></rect>
+        <g id="labels" sketch:type="MSLayerGroup" transform="translate(29.000000, 298.000000)" font-weight="bold" font-family="Helvetica" fill="#DBDBDB" sketch:alignment="middle" font-size="13">
+            <text id="Transitions" sketch:type="MSTextLayer">
+                <tspan x="0" y="13" fill="#333333">Tr</tspan>
+                <tspan x="13" y="13" fill="#333333">ansitions</tspan>
+            </text>
+            <text id="FANBOYS" sketch:type="MSTextLayer">
+                <tspan x="100" y="13" fill="#333333">FANBOYS</tspan>
+            </text>
+            <text id="Vocabulary" sketch:type="MSTextLayer">
+                <tspan x="200" y="13" fill="#333333">Vocabulary</tspan>
+            </text>
+            <text id="Precision" sketch:type="MSTextLayer">
+                <tspan x="300" y="13" fill="#333333">Precision</tspan>
+            </text>
+            <text id="Caution!" sketch:type="MSTextLayer">
+                <tspan x="400.144531" y="13" fill="#333333">Caution!</tspan>
+            </text>
+        </g>
+        <rect id="Rectangle-3" stroke="#353031" stroke-width="3" fill="#FFF67D" sketch:type="MSShapeGroup" x="34" y="150" width="50" height="147"></rect>
+        <rect id="Rectangle-3" stroke="#353031" stroke-width="3" fill="#FF4057" sketch:type="MSShapeGroup" x="134" y="247" width="50" height="50"></rect>
+        <rect id="Rectangle-3" stroke="#353031" stroke-width="3" fill="#7ED321" sketch:type="MSShapeGroup" x="234" y="36" width="50" height="261"></rect>
+        <rect id="Rectangle-3" stroke="#353031" stroke-width="3" fill="#7ED321" sketch:type="MSShapeGroup" x="434" y="90" width="50" height="207"></rect>
+        <rect id="Rectangle-3" stroke="#353031" stroke-width="3" fill="#7ED321" sketch:type="MSShapeGroup" x="334" y="90" width="50" height="207"></rect>
+    </g>
+</svg>
