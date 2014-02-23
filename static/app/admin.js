@@ -2,8 +2,8 @@ cdexApp.directive('barchart', function() {
 
    // constants
 
-  var margin = {top: 20, right: 30, bottom: 30, left: 40},
-    width = 960 - margin.left - margin.right,
+  var margin = {top: 20, right: 40, bottom: 30, left: 40},
+    width = 800 - margin.left - margin.right,
     height = 330 - margin.top - margin.bottom;      
 
   return {
@@ -52,23 +52,28 @@ cdexApp.directive('barchart', function() {
       var y = d3.scale.linear()
           .range([height, 0]);
 
+      // setup the domain 0 - 100%
+      y.domain([0, 100]);
+
+      var yAxis = d3.svg.axis()
+        .scale(y)
+        .orient("left")
+        .ticks(10);
 
 
       var xAxis = d3.svg.axis()
           .scale(x)
           .orient('bottom');
 
-      var yAxis = d3.svg.axis()
-          .scale(y)
-          .orient('left');
-
       var chart = d3.select(element[0]).append('svg')
-            .attr('height', height)
-            .attr('width', width);
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
-      // setup the domain 0 - 100%
-      y.domain([0, 100]);
+
+
 
       var barWidth = width / data.length;
 
@@ -80,7 +85,9 @@ cdexApp.directive('barchart', function() {
       bar.append('rect')
           .attr('y', function(d) { return y(d.value); })
           .attr('height', function(d) { return height - y(d.value); })
-          .attr('width', barWidth - 1)
+          .attr('width', barWidth - 10)
+          
+          
           .style('fill', function(d) {
             // 80+ Green
             // 60 - 80 Yellow
@@ -97,8 +104,6 @@ cdexApp.directive('barchart', function() {
             }
 
             
-
-            
           });
 
       bar.append('text')
@@ -107,7 +112,17 @@ cdexApp.directive('barchart', function() {
           .attr('dy', '.75em')
           .text(function(d) { return d.value });
 
-    
+
+
+      chart.append("g")
+        .attr("class", "y axis")
+        .call(yAxis)
+      .append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 6)
+        .attr("dy", ".71em")
+        .style("text-anchor", "end")
+        .text("Scores");        
     }
   }
 })
