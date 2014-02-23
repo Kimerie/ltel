@@ -792,7 +792,7 @@ var markers = [
 
         {
             "key": "vocabulary",
-            "search": [ "great", "wonderful", "improve", "exhausted", "sleepwalking", "slurred" ],
+            "search": [ "great", "wonderful", "special", "improve", "exhausted", "sleepwalking", "slurred" ],
             "position": ["start"],
             "score": 10,
             "klass": "precision10"
