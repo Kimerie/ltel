@@ -17,7 +17,7 @@ var one_line = /\n/g;
 var current_style;
 var first_char = /\S/;
 
-
+var ids = [];
 
 var cdexApp = angular.module('cdexApp', [
   'ngRoute' // add controllers here
@@ -86,42 +86,47 @@ var langs =
         ['日本語',           ['ja-JP']],
         ['Lingua latīna',   ['la']]];
 
+
+var words = [];
 var markers = {
     "markers": [
         {
-            "key": "transitions",
+            "key": "transition",
             "search": [ "for example", "when", "because", "so", "hello", "test", "what"],
             "position": ["start"],
-            "score": 2
+            "score": 10
         },
-
         {
-            "key": "complexity",
+            "key": "fanboys",
+            "search": [ "great", "wonderful", "what", "improve", "fan", "play", "where"],
+            "position": ["start"],
+            "score": 20
+        },
+        {
+            "key": "vocabulary",
             "search": [
                 "for", "and", "nor", "but", "or", "yet", "so"
             ],
             "position": ["middle"],
-            "score": 1
-        },
-
-
-        {
-            "key": "badwords",
-            "search": [
-                "for", "thing", "like", "you know", "good", "umm", "just is"
-            ],
-            "position": ["anywhere"],
-            "score": -1
+            "score": 30
         },
 
         {
             "key": "precision",
             "search": [
-                "lots"
+                "lots", "about", "how", "if"
             ],
             "position": ["anywhere"],
-            "score": 1
+            "score": 50
         },
+        {
+            "key": "caution",
+            "search": [
+                "for", "thing", "like", "you know", "good", "umm", "just is"
+            ],
+            "position": ["anywhere"],
+            "score": -5
+        }
 
     ]
 }
@@ -319,8 +324,17 @@ function updateCountry() {
 
 function recordStartup() {
   console.log('recordStartup');
+    var i;
+    // init words
+    words = [];
+    for(i = 0; i < markers.markers.length; i++) {
+        words.push([])
+    }
 
-  for (var i = 0; i < langs.length; i++) {
+  ids = [
+      "transitionID", "fanboysID", "academicID", "precisionID"
+  ];
+  for ( i = 0; i < langs.length; i++) {
       select_language.options[i] = new Option(langs[i][0], i);
   }
   select_language.selectedIndex = 6;
@@ -397,7 +411,7 @@ function recordStartup() {
         //var find = 'Hello';
         //var tmpstr = '<span class="red">'+find+'</span>';
         //final_transcript =  replaceAll(find, tmpstr, final_transcript);
-        final_span.innerHTML = linebreak(final_transcript);
+        final_span.innerHTML ="<H3>"+linebreak(final_transcript) +"</H3>" ;
         interim_span.innerHTML = linebreak(interim_transcript);
         if (final_transcript || interim_transcript) {
             showButtons('inline-block');
@@ -473,11 +487,9 @@ function replaceAll(find, replace, str) {
 }
 
 function updateScore() {
-    var items = [];
     var score = 0;
     var j = 0;
-    var colorClass = ["greenH", "yellowH", "redH", "yellowH"];
-    itmes = markers.markers;
+    var colorClass = ["greenH", "greenH", "yellowH",  "yellowH", "redH"];
     for(var data in markers.markers) {
         var s = markers.markers[data];
         var search = [];
@@ -486,9 +498,10 @@ function updateScore() {
             var find = search[i];
             if(final_transcript.search(find) !== -1) {
 
+                if(newword(j, find)===true) {
+                    updateBar(j);
+                }
                 score += parseInt(s.score);
-                console.log("update score === "+score);
-
                 var tmpstr = '<span class='+colorClass[j]+'>'+find+'</span>';
                 final_transcript =  replaceAll(find, tmpstr, final_transcript);
             }
@@ -501,6 +514,24 @@ function updateScore() {
 }
 
 
+function newword(indx, find) {
+    for(var i = 0; i < words[indx].length; i++) {
+        if(words[indx][i].localeCompare(find) === 0) {
+            return false;
+        }
+    }
+    words[indx].push(find);
+    return true;
+}
+function updateBar(indx) {
+    var keyID = markers.markers[indx].key;
+    var varid ="#"+ keyID;
+    if(words[indx].length < 11) {
+        var value = words[indx].length+"0%";
+    console.log("WIDTH = "+value);
+    $(varid).css("width", value);
+    }
+}
 
 
 function startButton(event) {
@@ -509,6 +540,10 @@ function startButton(event) {
 
         recognition.stop();
         return;
+    }
+    for(var i = 0; i < markers.markers.length; i++) {
+        var varid = "#"+markers.markers[i].key;
+        $(varid).css("width", "5%");
     }
     updateInterval = setInterval(function() {updateScore()}, 1000);  // start formating and updating score
     final_transcript = '';
