@@ -304,10 +304,16 @@ function loadLocalStorageData() {
         var dataContentDiv = '<ul>';
         for(var i = 0; i < existingData.length; i++) {
              var entry = existingData[i];
-            //dataContentDiv = dataContentDiv + "<li>" + entry.name + ": " + entry.data + "</li>";
-            dataContentDiv = dataContentDiv + "<li id="+i+">" + entry.name + "</li>";
+            dataContentDiv = dataContentDiv + "<li class='ui-state-highlight' style='list-style-type: none;' id="+i+">" + entry.name + "</li>";
         }
         dataContentDiv = dataContentDiv+'</ul>';
+
+/*
+        var dataContentDiv = '';
+        for(var i = 0; i < existingData.length; i++) {
+            var entry = existingData[i];
+            dataContentDiv = dataContentDiv + "<a class='button' id="+i+">"+entry.name+"</a><br/>";
+        }*/
         console.log(dataContentDiv);
         $('#datacontent').append(dataContentDiv);
     }
