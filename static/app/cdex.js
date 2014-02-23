@@ -6,6 +6,8 @@ var GLOBS = {};   // hacky global for passing stuff around
 var recognizing = false;
 var create_email = false;
 var final_transcript = '';
+var show_transcript = '';
+var interim_transcript = '';
 var ignore_onend;
 var start_timestamp;
 var recognition = new webkitSpeechRecognition();
@@ -97,18 +99,18 @@ var markers = {
             "score": 10
         },
         {
-            "key": "fanboys",
+            "key": "vocabulary",
             "search": [ "great", "wonderful", "what", "improve", "fan", "play", "where"],
             "position": ["start"],
             "score": 20
         },
         {
-            "key": "vocabulary",
+            "key": "fanboys",
             "search": [
                 "for", "and", "nor", "but", "or", "yet", "so"
             ],
             "position": ["middle"],
-            "score": 30
+            "score": 20
         },
 
         {
@@ -122,7 +124,7 @@ var markers = {
         {
             "key": "caution",
             "search": [
-                "for", "thing", "like", "you know", "good", "umm", "just is"
+                "for", "thing", "like", "you know", "good", "umm", "just is", "whatever", "kind of", "err", "kinda", "sort of"
             ],
             "position": ["anywhere"],
             "score": -5
@@ -222,15 +224,31 @@ cdexApp.controller('TopController', function ($scope) {
 });
 
 cdexApp.controller('ResultsController', function ($scope) {
-  $scope.message = 'results';
+
   $scope.GLOBS = GLOBS;
-  var score = GLOBS.score || 1;
-  var max_score = GLOBS.max_score || 1;
-  var pct = (100.0 * score) / max_score;
-  console.log(score + "/" + max_score + " : " + pct );
+  $scope.score = GLOBS.score || 10;
+  $scope.max_score = GLOBS.max_score || 100;
+  $scope.pct_score = 100.0 * $scope.score / $scope.max_score;
+
+  var rank = Math.round($scope.pct_score / 10);
+
+  if (rank > 8) {
+    msg = "Excellent!";
+  } else if(rank > 5) {
+    msg = "Pretty good!";    
+  } else if(rank > 3) {
+    msg = "try harder!";    
+  } else {
+    msg = "Hmm... not too good :(";
+  }
+
+  console.log($scope.score + "/" + $scope.max_score + " : " + $scope.pct_score );
+  console.log("rank:" + rank);
   
+  $scope.resultMsg = msg;
+
   $("#scorebox").hide(0);
-  $("#scorebox").width(pct + "%");
+  $("#scorebox").width($scope.pct_score + "%");
 
   $("#scorebox").delay(250).show(1000);
 });
@@ -321,11 +339,16 @@ function updateCountry() {
     select_dialect.style.visibility = list[1].length == 1 ? 'hidden' : 'visible';
 }
 
+function micImage(src) {
+    $("#start_img").attr('src', src );
+}
 
 function recordStartup() {
   console.log('recordStartup');
-    var i;
+  $("#showAllowHint").hide(0);
+
     // init words
+    var i;
     words = [];
     for(i = 0; i < markers.markers.length; i++) {
         words.push([])
@@ -349,19 +372,22 @@ function recordStartup() {
     recognition.interimResults = true;
 
     recognition.onstart = function() {
+        console.log("recognition.onstart");
+        $("#showAllowHint").hide(200);
+
         recognizing = true;
         showInfo('info_speak_now');
-        start_img.src = '../../img/mic-animate.gif';
+        micImage('/img/mic-animate.gif');
     };
 
     recognition.onerror = function(event) {
         if (event.error == 'no-speech') {
-            start_img.src = '../../img/mic.gif';
+            micImage('../../img/mic.gif');
             showInfo('info_no_speech');
             ignore_onend = true;
         }
         if (event.error == 'audio-capture') {
-            start_img.src = '../../img/mic.gif';
+            micImage("/img/mic.gif");
             showInfo('info_no_microphone');
             ignore_onend = true;
         }
@@ -380,139 +406,94 @@ function recordStartup() {
         if (ignore_onend) {
             return;
         }
-        start_img.src = '../../img/mic.gif';
+        micImage('/img/mic.gif');
         if (!final_transcript) {
             showInfo('info_start');
             return;
         }
-        showInfo('');
-        if (window.getSelection) {
-            window.getSelection().removeAllRanges();
-            var range = document.createRange();
-            range.selectNode(document.getElementById('final_span'));
-            window.getSelection().addRange(range);
-        }
-        if (create_email) {
-            create_email = false;
-            createEmail();
-        }
+        // showInfo('');
+        // if (window.getSelection) {
+        //     window.getSelection().removeAllRanges();
+        //     var range = document.createRange();
+        //     range.selectNode(document.getElementById('final_span'));
+        //     window.getSelection().addRange(range);
+        // }
+        // if (create_email) {
+        //     create_email = false;
+        //     createEmail();
+        // }
     };
 
     recognition.onresult = function(event) {
-        var interim_transcript = '';
+        interim_transcript = '';
         for (var i = event.resultIndex; i < event.results.length; ++i) {
             if (event.results[i].isFinal) {
                 final_transcript += event.results[i][0].transcript;
+                console.log("isFinal:", final_transcript);
+                updateScore(final_transcript);
             } else {
                 interim_transcript += event.results[i][0].transcript;
             }
         }
-        final_transcript = capitalize(final_transcript);
+        console.log("onresult: ", interim_transcript, " | ", final_transcript);
+
+        // final_transcript = capitalize(final_transcript);
         //var find = 'Hello';
         //var tmpstr = '<span class="red">'+find+'</span>';
         //final_transcript =  replaceAll(find, tmpstr, final_transcript);
-        final_span.innerHTML ="<H3>"+linebreak(final_transcript) +"</H3>" ;
-        interim_span.innerHTML = linebreak(interim_transcript);
-        if (final_transcript || interim_transcript) {
-            showButtons('inline-block');
-        }
+        // final_span.innerHTML = "<H3>"+linebreak(final_transcript) +"</H3>" ;
+        // final_span.innerHTML = linebreak(final_transcript);
 
+        // if (interim_transcript=='') {
+        //     console.log("final:", final_transcript);
+        // }
+
+        interim_vtt.innerHTML = linebreak(interim_transcript);
 
     };
 }
 }
 
 
-function upgrade() {
-    start_button.style.visibility = 'hidden';
-    showInfo('info_upgrade');
-}
-
-
-function linebreak(s) {
-    return s.replace(two_line, '<p></p>').replace(one_line, '<br>');
-}
-
-function capitalize(s) {
-    return s.replace(first_char, function(m) { return m.toUpperCase(); });
-}
-
-function createEmail() {
-    var n = final_transcript.indexOf('\n');
-    if (n < 0 || n >= 80) {
-        n = 40 + final_transcript.substring(40).indexOf(' ');
-    }
-    var subject = encodeURI(final_transcript.substring(0, n));
-    var body = encodeURI(final_transcript.substring(n + 1));
-    window.location.href = 'mailto:?subject=' + subject + '&body=' + body;
-}
-
-function copyButton() {
-    if(final_transcript) {  // write to local storage
-        if(typeof(Storage) !== "undefined") {
-            console.log("write to local storage");
-            localStorage.setItem("contentText", final_transcript);
-        }
-    }
-    if (recognizing) {
-        recognizing = false;
-        window.clearInterval(updateInterval);  // stop updating store and formt
-        recognition.stop();
-    }
-    updateScore();
-    goResults();
-}
-
-function goResults() {
-    //TODO - fix navigation
-    // $location.path('/results');
-    window.location.href = '#results';
-
-}
-
-function emailButton() {
-    if (recognizing) {
-        create_email = true;
-        recognizing = false;
-        recognition.stop();
-    } else {
-        createEmail();
-    }
-    email_button.style.display = 'none';
-    email_info.style.display = 'inline-block';
-    showInfo('');
-}
 function replaceAll(find, replace, str) {
-    return str.replace(new RegExp(find, 'g'), replace);
+    // return str.replace(new RegExp(find, 'g'), replace);
+    var res = str.replace(find, replace);
+    return res;
 }
 
-function updateScore() {
+function updateScore(raw_text) {
     var score = 0;
     var j = 0;
     var colorClass = ["greenH", "greenH", "yellowH",  "yellowH", "redH"];
     for(var data in markers.markers) {
         var s = markers.markers[data];
+        // console.log(s);
         var search = [];
         search = s.search;
         for(var i = 0; i < search.length; i++) {
             var find = search[i];
-            if(final_transcript.search(find) !== -1) {
-
+            if (final_transcript.search(find) != -1) {
                 if(newword(j, find)===true) {
                     updateBar(j);
                 }
                 score += parseInt(s.score);
-                var tmpstr = '<span class='+colorClass[j]+'>'+find+'</span>';
-                final_transcript =  replaceAll(find, tmpstr, final_transcript);
+                // var tmpstr = '<span class='+colorClass[j]+'>'+find+'</span>';
+                var tmpstr = "<b>" + find + "</b>";
+                var display_transcript =  replaceAll(find, tmpstr, final_transcript);
             }
         }
         j++;
     }
     GLOBS.score = score;
+    GLOBS.display_transcript = display_transcript;
     var scoreText = document.getElementById("scoreTextId");
     scoreText.innerHTML= "<h4>Score: <br/>  "+score+"</h4>";
-}
 
+    console.log(display_transcript);
+
+    $("#vtt-out").html(display_transcript);
+
+}
 
 function newword(indx, find) {
     for(var i = 0; i < words[indx].length; i++) {
@@ -523,6 +504,7 @@ function newword(indx, find) {
     words[indx].push(find);
     return true;
 }
+
 function updateBar(indx) {
     var keyID = markers.markers[indx].key;
     var varid ="#"+ keyID;
@@ -534,7 +516,15 @@ function updateBar(indx) {
 }
 
 
+function showAllow(f) {
+    for(var i=0;i<3;i++) {
+        $('#showAllowHint').fadeTo('fast',0).fadeTo('fast',1).delay(i*10);
+    }
+    
+}
+
 function startButton(event) {
+    showAllow(true);
     if (recognizing) {
         window.clearInterval(updateInterval);  // stop updating store and format
 
@@ -545,42 +535,37 @@ function startButton(event) {
         var varid = "#"+markers.markers[i].key;
         $(varid).css("width", "5%");
     }
-    updateInterval = setInterval(function() {updateScore()}, 1000);  // start formating and updating score
+
+    ///THIS is where we start
+    // updateInterval = setInterval(function() {updateScore()}, 1000);  // start formating and updating score
+
     final_transcript = '';
     recognition.lang = select_dialect.value;
     recognition.start();
     ignore_onend = false;
-    final_span.innerHTML = '';
-    interim_span.innerHTML = '';
-    start_img.src = '../../img/mic-slash.gif';
+    // final_span.innerHTML = '';
+    $("#vtt-out").html("----");
+    interim_vtt.innerHTML = '';
+    micImage('/img/mic-slash.gif');
     showInfo('info_allow');
-    showButtons('none');
+    // showButtons('none');
     start_timestamp = event.timeStamp;
 }
 
 function showInfo(s) {
-    if (s) {
-        for (var child = info.firstChild; child; child = child.nextSibling) {
-            if (child.style) {
-                child.style.display = child.id == s ? 'inline' : 'none';
-            }
-        }
-        info.style.visibility = 'visible';
-    } else {
-        info.style.visibility = 'hidden';
-    }
+    // info.style.visibility = 'visible';
 }
 
-function showButtons(style) {
-    if (style == current_style) {
-        return;
-    }
-    current_style = style;
-    copy_button.style.display = style;
-    email_button.style.display = style;
-    copy_info.style.display = 'none';
-    email_info.style.display = 'none';
-}
+// function showButtons(style) {
+//     if (style == current_style) {
+//         return;
+//     }
+//     current_style = style;
+//     copy_button.style.display = style;
+//     // email_button.style.display = style;
+//     // copy_info.style.display = 'none';
+//     // email_info.style.display = 'none';
+// }
 
 
 function appendItem(key, data) {
@@ -597,3 +582,64 @@ function appendItem(key, data) {
     }
 }
 
+function upgrade() {
+    start_button.style.visibility = 'hidden';
+    showInfo('info_upgrade');
+}
+
+
+function linebreak(s) {
+    return s.replace(two_line, '<p></p>').replace(one_line, '<br>');
+}
+
+// function capitalize(s) {
+//     return s.replace(first_char, function(m) { return m.toUpperCase(); });
+// }
+
+// function createEmail() {
+//     var n = final_transcript.indexOf('\n');
+//     if (n < 0 || n >= 80) {
+//         n = 40 + final_transcript.substring(40).indexOf(' ');
+//     }
+//     var subject = encodeURI(final_transcript.substring(0, n));
+//     var body = encodeURI(final_transcript.substring(n + 1));
+//     window.location.href = 'mailto:?subject=' + subject + '&body=' + body;
+// }
+
+// function copyButton() {
+//     if(final_transcript) {  // write to local storage
+//         if(typeof(Storage) !== "undefined") {
+//             console.log("write to local storage");
+//             localStorage.setItem("contentText", final_transcript);
+//         }
+//     }
+//     if (recognizing) {
+//         recognizing = false;
+//         window.clearInterval(updateInterval);  // stop updating store and formt
+//         recognition.stop();
+//     }
+//     updateScore();
+//     goResults(final_transcript);
+// }
+
+function goResults() {
+    console.log("final_transcript:", final_transcript);
+    //TODO - fix navigation
+    // $location.path('/results');
+    window.location.href = '#results';
+
+}
+
+
+// function emailButton() {
+//     if (recognizing) {
+//         create_email = true;
+//         recognizing = false;
+//         recognition.stop();
+//     } else {
+//         createEmail();
+//     }
+//     email_button.style.display = 'none';
+//     email_info.style.display = 'inline-block';
+//     showInfo('');
+// }

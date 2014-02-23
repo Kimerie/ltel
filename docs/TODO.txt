@@ -1,0 +1,6 @@
+TODO
+
+cleanup parser page
+popup hints
+
+background animation?

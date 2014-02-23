@@ -1,24 +1,43 @@
+<div class="row ctr large-12">
+    <h1>{{resultMsg}}</h1>
+</div>
+
 <div class="row">
-    <h1>Score: {{GLOBS.score}}/{{GLOBS.max_score}}</h1>
 
-    <div class="progress success round" style="border: 1px solid black; height:100px">
-        <span class="meter" id="scorebox">
-        </span>
+    <div class="large-2 ctr columns">
+        <h3>score</h3>
+        <h1>{{score}}/{{max_score}}</h1>
     </div>
 
-    <div class='blob'>
-    	<!-- parsed text goes here -->
+    <div class="large-10 columns">
+        <div class="progress success round" style="border: 1px solid black; height:100px">
+            <span class="meter" id="scorebox">
+            </span>
+        </div>
     </div>
+</div>
 
-    <div>
-        <h3>achievements</h3>
+<hr>
+
+<div class="row">
+
+    <div class="large-2 ctr rline columns">
+        <h3>skills</h3>
         <a href="#skills">
             <img width='150px' src="/img/badges/badge-01.png">
         </a>
     </div>
 
-    <div class="ctr">
-	<a href="#" class="button">Play more!</a>
-    </div>
+    <div class="large-10 columns">
+        <div class='blob'>
+        	{{blob.text}}
+        </div>
 
+        <div class="ctr">
+           <a href="#parser" class="button">Try again!</a>
+           <a href="#chat" class="button">Post this!</a>
+        </div>
+
+    </div>
 </div>
+

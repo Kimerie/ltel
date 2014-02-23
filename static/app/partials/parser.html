@@ -1,5 +1,10 @@
-<div class="row" style="text-align:center;">
-	<h2>notebook!</h2>
+<div id="showAllowHint" class="allowHint">
+Click the "Allow" <br/>
+button above
+</div>
+
+<div class="row ctr">
+ 	<h1>Rock Your Voice!</h1>
 </div>
 
 <div class="row">
@@ -9,8 +14,8 @@
 
 	<dl class="accordion" data-accordion>
 		<dd>
-			<div id="scoreTextId"><h4>Score: </h4> 
-
+			<div id="scoreTextId">
+        <h4>Score: </h4>
 			</div>
 		</dd>
 
@@ -36,104 +41,49 @@
                 <span id="vocabulary" class="meter" style="width: 10%"></span>
             </div>
             </a>
-        </dd>
-        <dd>
+      </dd>
+      <dd>
 		    <a href="">Precision
-            <div class="progress radius round">
-                <span id="precision" class="meter" style="width: 10%"></span>
-            </div>
-            </a>
-		</dd>
-        <dd>
-            <a href="">Caution
-                <div class="progress radius round">
-                    <span id="caution" class="meter" style="width: 10%"></span>
-                </div>
-            </a>
-        </dd>
+          <div class="progress radius round">
+            <span id="precision" class="meter" style="width: 10%"></span>
+          </div>
+        </a>
+  		</dd>
+
+      <dd>
+          <a href="">Caution
+              <div class="progress radius round">
+                  <span id="caution" class="meter" style="width: 10%"></span>
+              </div>
+          </a>
+      </dd>
+
 	</dl>
 
+    <div id="div_language">
+      <select id="select_language" onchange="updateCountry()"></select>
+      <select id="select_dialect" ></select>
+    </div>
+
 	<hr>
-	<h3>Skills</h3>
-		<a href="#skills">
-			<img width='150px' src="/img/badges/badge-01.png"><br/>
-		</a>
-		<a href="#skills">
-			<img width='150px' src="/img/badges/badge-02.png"><br/>
-		</a>
-		<a href="#skills">
-			<img width='150px' src="/img/badges/badge-03.png"><br/>
-		</a>
-		<a href="#skills">
-			<img width='150px' src="/img/badges/badge-04.png"><br/>
-		</a>
 		
-  	</div>
+	</div>
 
-	<div class="debug small-10 large-10 columns">
-		
+  <!-- content panel -->
 
-    <div id="info">
-      <p id="info_start">Click on the microphone icon and begin speaking.</p>
+	<div class="debug small-10 large-10 columns ctr">
+    <p id="info_start">Click on the microphone icon and begin speaking.</p>
 
-      <p id="info_speak_now">Speak now.</p>
+    <button id="start_button" onclick="startButton(event)" class="expand">
+      <img id="start_img" src="/img/mic.gif" alt="Start" />
+    </button>
 
-      <p id="info_no_speech">No speech was detected. You may need to adjust your <a href=
-      "//support.google.com/chrome/bin/answer.py?hl=en&amp;answer=1407892">microphone
-      settings</a>.</p>
+    <div id="vtt-out" class="vtt-out">final</div>
+    <div id="interim_vtt" class="interim_vtt">interim</div>
 
-      <p id="info_no_microphone" style="display:none">No microphone was found. Ensure
-      that a microphone is installed and that <a href=
-      "//support.google.com/chrome/bin/answer.py?hl=en&amp;answer=1407892">microphone
-      settings</a> are configured correctly.</p>
+    <hr>
+    <button id="copy_button" class="button" onclick="copyButton()">Check It!</button>
 
-      <p id="info_allow">Click the "Allow" button above to enable your microphone.</p>
-
-      <p id="info_denied">Permission to use microphone was denied.</p>
-
-      <p id="info_blocked">Permission to use microphone is blocked. To change, go to
-      chrome://settings/contentExceptions#media-stream</p>
-
-      <p id="info_upgrade">Web Speech API is not supported by this browser. Upgrade to
-      <a href="//www.google.com/chrome">Chrome</a> version 25 or later.</p>
-    </div>
-
-    <div class="">
-      <button id="start_button" onclick="startButton(event)"><img id="start_img" src=
-      "../../img/mic.gif" alt="Start" /></button>
-    </div>
-
-    <div id="results">
-      <span id="final_span" class="final"></span> <span id="interim_span" class=
-      "interim"></span>
-    </div>
-
-    <div class="center">
-      <div class="sidebyside" style="text-align:right">
-        <button id="copy_button" class="button" onclick="copyButton()">Save It</button>
-
-        <div id="copy_info" class="info">
-          Press Control-C to copy text.<br />
-          (Command-C on Mac.)
-        </div>
-      </div>
-
-      <div class="sidebyside">
-        <button id="email_button" class="button" onclick="emailButton()">Create
-        Email</button>
-
-        <div id="email_info" class="info">
-          Text sent to default email application.<br />
-          (See chrome://settings/handlers to change.)
-        </div>
-      </div>
-
-      <div id="div_language">
-        <select id="select_language" onchange="updateCountry()">
-          </select> &nbsp;&nbsp; <select id="select_dialect">
-          </select>
-      </div>
-    </div>
   </div>
 
 
