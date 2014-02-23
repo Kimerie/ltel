@@ -67,7 +67,48 @@
 }
 
 .vtt-out {
-	font-size: 36px;
+	font-size: 50px;
 	border: 2px solid black;
 	padding: 10px;
+	line-height: 200%;
+}
+
+.vtt1 {
+	padding: 10px;
+	border: 1px dashed #ddd;
+	-webkit-border-radius: 15px;
+}
+
+.precision10 {
+	background-color: #66FF00;
+	color: black;
+}
+
+.precision30 {
+	background-color: #cf0;
+	color: black;
+}
+.precision50 {
+	background-color: #33FF00;
+	color: white;
+}
+
+.transition10 {
+	background-color: #CCFF99;
+}
+
+.caution20 {
+	background-color: #660000;
+	color: white;
+}
+
+.caution10 {
+	background-color: #ff9999;
+	color: black;
+}
+
+.fanboys {
+	font-size: 70px;
+	background-color: #99FFff;
+	color: black;
 }

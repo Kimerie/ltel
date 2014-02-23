@@ -90,48 +90,6 @@ var langs =
 
 
 var words = [];
-var markers = {
-    "markers": [
-        {
-            "key": "transition",
-            "search": [ "for example", "when", "because", "so", "hello", "test", "what"],
-            "position": ["start"],
-            "score": 10
-        },
-        {
-            "key": "vocabulary",
-            "search": [ "great", "wonderful", "what", "improve", "fan", "play", "where"],
-            "position": ["start"],
-            "score": 20
-        },
-        {
-            "key": "fanboys",
-            "search": [
-                "for", "and", "nor", "but", "or", "yet", "so"
-            ],
-            "position": ["middle"],
-            "score": 20
-        },
-
-        {
-            "key": "precision",
-            "search": [
-                "lots", "about", "how", "if"
-            ],
-            "position": ["anywhere"],
-            "score": 50
-        },
-        {
-            "key": "caution",
-            "search": [
-                "for", "thing", "like", "you know", "good", "umm", "just is", "whatever", "kind of", "err", "kinda", "sort of"
-            ],
-            "position": ["anywhere"],
-            "score": -5
-        }
-
-    ]
-}
 
 
 
@@ -210,8 +168,8 @@ cdexApp.controller('TopController', function ($scope) {
 
   // TODO better way to persist data across URLs
   GLOBS.state = "top";
-  GLOBS.score = 7;
-  GLOBS.max_score = 10;
+  GLOBS.score = 0;
+  GLOBS.max_score = 100;
   $scope.GLOBS = GLOBS;
 
   for(var i=1;i<=3; i++) {
@@ -307,23 +265,22 @@ cdexApp.controller('ParserController', function ($scope) {
     console.log("ParserController.init");
     recordStartup();
     $scope.GLOBS = GLOBS;
-  // $scope.message = 'parsing!';
-  // $scope.blob = parseAll("");
+    GLOBS.score = 0;
 });
 
 
-function parseAll(blob) {
-  res = {
-    html: "<span>some text</span>",
-    score: 10
-  }
-  console.log(markers);
-  return res;
-}
+// function parseAll(blob) {
+//   res = {
+//     html: "<span>some text</span>",
+//     score: 10
+//   }
+//   console.log(markers);
+//   return res;
+// }
 
-function parseBad(blob) {
+// function parseBad(blob) {
   
-}
+// }
 
 
 ///////////////////
@@ -350,7 +307,7 @@ function recordStartup() {
     // init words
     var i;
     words = [];
-    for(i = 0; i < markers.markers.length; i++) {
+    for(i = 0; i < markers.length; i++) {
         words.push([])
     }
 
@@ -376,7 +333,7 @@ function recordStartup() {
         $("#showAllowHint").hide(200);
 
         recognizing = true;
-        showInfo('info_speak_now');
+        // showInfo('info_speak_now');
         micImage('/img/mic-animate.gif');
     };
 
@@ -430,7 +387,7 @@ function recordStartup() {
             if (event.results[i].isFinal) {
                 final_transcript += event.results[i][0].transcript;
                 console.log("isFinal:", final_transcript);
-                updateScore(final_transcript);
+                scanText(final_transcript);
             } else {
                 interim_transcript += event.results[i][0].transcript;
             }
@@ -451,7 +408,7 @@ function recordStartup() {
         interim_vtt.innerHTML = linebreak(interim_transcript);
 
     };
-}
+    }
 }
 
 
@@ -461,59 +418,110 @@ function replaceAll(find, replace, str) {
     return res;
 }
 
-function updateScore(raw_text) {
-    var score = 0;
-    var j = 0;
-    var colorClass = ["greenH", "greenH", "yellowH",  "yellowH", "redH"];
-    for(var data in markers.markers) {
-        var s = markers.markers[data];
-        // console.log(s);
-        var search = [];
-        search = s.search;
-        for(var i = 0; i < search.length; i++) {
-            var find = search[i];
-            if (final_transcript.search(find) != -1) {
-                if(newword(j, find)===true) {
-                    updateBar(j);
-                }
-                score += parseInt(s.score);
-                // var tmpstr = '<span class='+colorClass[j]+'>'+find+'</span>';
-                var tmpstr = "<b>" + find + "</b>";
-                var display_transcript =  replaceAll(find, tmpstr, final_transcript);
-            }
-        }
-        j++;
-    }
-    GLOBS.score = score;
-    GLOBS.display_transcript = display_transcript;
-    var scoreText = document.getElementById("scoreTextId");
-    scoreText.innerHTML= "<h4>Score: <br/>  "+score+"</h4>";
 
-    console.log(display_transcript);
+function addWord(el) {
+    $("#vtt-out").append(el);
+}
 
-    $("#vtt-out").html(display_transcript);
+function scoreBoard(w, data) {
+    GLOBS.score += data['score'];
+    console.log("score:");
+    console.log(data);
+    $("#scoreTextId").html(GLOBS.score);
+
+    // updatebar
+    var box = $("#" + data['key']);
+    var pct = box.pct || 0;
+    console.log(pct);
+    pct += data['score'];
+    box.css("width", pct + "%");
 
 }
 
-function newword(indx, find) {
-    for(var i = 0; i < words[indx].length; i++) {
-        if(words[indx][i].localeCompare(find) === 0) {
-            return false;
+
+function scanWord(w) {
+    // w = w.trim();  //TODO
+    var r = $("<span class='vtt1'> " + w + " </span> ");  //note the space
+
+    for (var i=0; i< markers.length; i++) {
+        data = markers[i];
+        var tgtWords = data['search'];
+        // console.log(data);
+        // console.log(tgtWords, w);
+        if (tgtWords.indexOf(w) != -1) {
+            scoreBoard(w, data);
+            r.addClass(data['klass']);
         }
     }
-    words[indx].push(find);
-    return true;
+    return r;
 }
 
-function updateBar(indx) {
-    var keyID = markers.markers[indx].key;
-    var varid ="#"+ keyID;
-    if(words[indx].length < 11) {
-        var value = words[indx].length+"0%";
-    console.log("WIDTH = "+value);
-    $(varid).css("width", value);
-    }
+function scanText(raw_text) {
+    console.log(raw_text);
+    var words = raw_text.split(" ");
+    console.log(words);
+    var out = _.map(words, scanWord);
+
+    $("#vtt-out").empty();
+    _.each(out, addWord);
+
+    console.log(out);
 }
+
+
+// function updateScore(raw_text) {
+//     var score = 0;
+//     var j = 0;
+//     var colorClass = ["greenH", "greenH", "yellowH",  "yellowH", "redH"];
+//     for(var data in markers) {
+//         var s = markers[data];
+//         // console.log(s);
+//         var search = [];
+//         search = s.search;
+//         for(var i = 0; i < search.length; i++) {
+//             var find = search[i];
+//             if (final_transcript.search(find) != -1) {
+//                 if(newword(j, find)===true) {
+//                     updateBar(j);
+//                 }
+//                 score += parseInt(s.score);
+//                 // var tmpstr = '<span class='+colorClass[j]+'>'+find+'</span>';
+//                 var tmpstr = "<b>" + find + "</b>";
+//                 var display_transcript =  replaceAll(find, tmpstr, final_transcript);
+//             }
+//         }
+//         j++;
+//     }
+//     GLOBS.score = score;
+//     GLOBS.display_transcript = display_transcript;
+//     var scoreText = document.getElementById("scoreTextId");
+//     scoreText.innerHTML= "<h4>Score: <br/>  "+score+"</h4>";
+
+//     console.log(display_transcript);
+
+//     $("#vtt-out").html(display_transcript);
+
+// }
+
+// function newword(indx, find) {
+//     for(var i = 0; i < words[indx].length; i++) {
+//         if(words[indx][i].localeCompare(find) === 0) {
+//             return false;
+//         }
+//     }
+//     words[indx].push(find);
+//     return true;
+// }
+
+// function updateBar(indx) {
+//     var keyID = markers[indx].key;
+//     var varid ="#"+ keyID;
+//     if(words[indx].length < 11) {
+//         var value = words[indx].length+"0%";
+//     console.log("WIDTH = "+value);
+//     $(varid).css("width", value);
+//     }
+// }
 
 
 function showAllow(f) {
@@ -531,8 +539,8 @@ function startButton(event) {
         recognition.stop();
         return;
     }
-    for(var i = 0; i < markers.markers.length; i++) {
-        var varid = "#"+markers.markers[i].key;
+    for(var i = 0; i < markers.length; i++) {
+        var varid = "#"+markers[i].key;
         $(varid).css("width", "5%");
     }
 
@@ -547,11 +555,12 @@ function startButton(event) {
     $("#vtt-out").html("----");
     interim_vtt.innerHTML = '';
     micImage('/img/mic-slash.gif');
-    showInfo('info_allow');
+    // showInfo('info_allow');
     // showButtons('none');
     start_timestamp = event.timeStamp;
 }
 
+//TODO - remove
 function showInfo(s) {
     // info.style.visibility = 'visible';
 }
@@ -641,5 +650,68 @@ function goResults() {
 //     }
 //     email_button.style.display = 'none';
 //     email_info.style.display = 'inline-block';
-//     showInfo('');
+    // showInfo('');
 // }
+
+
+
+
+var markers = [
+        {
+            "key": "transition",
+            "search": [ "for example", "when", "because", "so", "hello", "test", "what", "meantime"],
+            "position": ["start"],
+            "score": 10,
+            "klass": "transition10"
+        },
+
+        {
+            "key": "fanboys",
+            "search": [
+                "for", "and", "nor", "but", "or", "yet", "so"
+            ],
+            "position": ["middle"],
+            "score": 20,
+            "klass": "fanboys"
+        },
+
+        {
+            "key": "vocabulary",
+            "search": [ "great", "wonderful", "improve", "exhausted", "sleepwalking", "slurred" ],
+            "position": ["start"],
+            "score": 10,
+            "klass": "precision10"
+        },
+
+        {
+            "key": "precision",
+            "search": [
+                "exactly", "precisely", "specifically", "approximately"
+            ],
+            "position": ["anywhere"],
+            "score": 30,
+            "klass": "precision30"
+        },
+
+        {
+            "key": "caution",
+            "search": [
+                "for", "you know", "good", "umm", "just", "kind of", "err", "kinda", "sort of"
+            ],
+            "position": ["anywhere"],
+            "score": -10,
+            "klass": "caution10"
+        },
+
+        {
+            "key": "caution",
+            "search": [
+                "thing", "like", "whatever", "sometime", "dunno", "sorta"
+            ],
+            "position": ["anywhere"],
+            "score": -20,
+            "klass": "caution20"
+        }
+
+    ]
+
