@@ -646,6 +646,10 @@ function linebreak(s) {
 }
 
 function checkIt() {
+    if (recognizing) {
+        recognition.stop();
+        return;
+    }
     goResults();
 }
 
