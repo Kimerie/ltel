@@ -83,6 +83,11 @@ cdexApp.config(['$routeProvider',
         controller: 'AdminController'
       }).
 
+      when('/teacher-panel', {
+        templateUrl: 'app/partials/teacher-panel.html',
+        controller: 'TeacherPanelController'
+      }).
+
         when('/classdata', {
             templateUrl: 'app/partials/classdata.html',
             controller: 'ClassdataController'
@@ -110,6 +115,9 @@ cdexApp.factory('EventService', function ($http) {
   return EventService;
 });
 
+cdexApp.controller('TeacherPanelController', function ($scope) {
+  // YOOO
+});
 
 
 cdexApp.controller('TopController', function ($scope) {
