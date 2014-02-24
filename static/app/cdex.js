@@ -217,6 +217,27 @@ cdexApp.controller('ResultsController', function ($scope) {
 });
 
 cdexApp.controller('SkillsController', function ($scope) {  
+   // $('.infoDiv').hide();
+   // $('.badgeDiv').on('click', function(){
+   //    $('infoDiv').show();
+   // });
+   $('#vocabularyBadge').click(function(){
+      $('#vocabularyText').toggle(800);
+   });
+   $('#fanboysBadge').click(function(){
+      $('#fanboysText').toggle(800);
+   });
+   $('#transitionsBadge').click(function(){
+      $('#transitionsText').toggle(800);
+   });
+   $('#precisionBadge').click(function(){
+      $('#precisionText').toggle(800);
+   });
+   $('#cautionBadge').click(function(){
+      $('#cautionText').toggle(800);
+   });
+
+   //$('#precisionText').hide();
 });
 
 cdexApp.controller('ChatController', function ($scope) {  
