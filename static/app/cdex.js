@@ -201,7 +201,8 @@ cdexApp.controller('ResultsController', function ($scope) {
           var className = "Class data "+existingData.length;
           var entry = {
               "name": className,
-              "data": GLOBS.blob
+              "data": GLOBS.blob,
+              "score": GLOBS.score
           }
           existingData.push(entry);
           console.log(existingData);
@@ -305,12 +306,7 @@ function loadLocalStorageData() {
         }
         dataContentDiv = dataContentDiv+'</ul>';
 
-/*
-        var dataContentDiv = '';
-        for(var i = 0; i < existingData.length; i++) {
-            var entry = existingData[i];
-            dataContentDiv = dataContentDiv + "<a class='button' id="+i+">"+entry.name+"</a><br/>";
-        }*/
+
         console.log(dataContentDiv);
         $('#datacontent').append(dataContentDiv);
     }
@@ -322,6 +318,7 @@ function loadLocalStorageData() {
         var ID = $(ev.target).attr('id');
         entry = existingData[parseInt(ID)];
         GLOBS.blob = entry.data;
+        GLOBS.score = entry.score;
         window.location.href = '#results';
 
     });
